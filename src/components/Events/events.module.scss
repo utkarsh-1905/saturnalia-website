@@ -1,0 +1,16 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+
+.groundmesh{
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    background-color: transparent;
+    bottom: 0;
+    background-image: url("./ground.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:contain;
+}
