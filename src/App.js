@@ -1,5 +1,4 @@
 import Backdrop from "./components/Backdrop/Backdrop";
-import Events from "./components/Events/Events";
 
 function App() {
   return (
