@@ -1,5 +1,4 @@
 import React from "react";
-import GroundMesh from "./ground.svg";
 import styles from "./events.module.scss";
 
 const Events = () => {
