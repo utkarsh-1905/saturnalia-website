@@ -1,0 +1,53 @@
+.contentBody{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Contains Navbar and other stuff */
+.footer{
+    height: 20vh;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+/* Navbar Styling */
+.navbar{
+    height: 10vh;
+    width: 50%;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(to bottom, #000000e3, #000000df,#000000aa, #0b0b3fa9);
+    transform: perspective(10px) rotateX(1deg);
+}
+
+/* Contains the main Saturnalia Logo */
+
+.content{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Logo Styling */
+.logo{
+    display: flex;
+    width: 60rem;   
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
