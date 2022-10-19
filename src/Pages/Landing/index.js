@@ -21,7 +21,24 @@ export default function Landing() {
             </div>
             <div className={contentStyles.footer}>
                 {/* Navbar */}
-                <div className={contentStyles.navbar}>
+                <div className={[contentStyles.navbar]}>
+                    <div className={contentStyles.navLeft}>
+                        <a className={contentStyles.navlink} href="">Home</a>
+                        <a className={contentStyles.navlink} href="">Events</a>
+                        <a className={contentStyles.navlink} href="">Features</a>
+                    </div>
+                    <div className={contentStyles.buttonTray}>
+                        <button
+                            className={contentStyles.loginButton}
+                        >
+                            <em>LOG IN</em>
+                        </button>
+                    </div>
+                    <div className={contentStyles.navRight}>
+                        <a className={contentStyles.navlink} href="">Sponsors</a>
+                        <a className={contentStyles.navlink} href="">FAQS</a>
+                        <a className={contentStyles.navlink} href="">Contant Us</a>
+                    </div>
                 </div>
             </div>
         </div>
