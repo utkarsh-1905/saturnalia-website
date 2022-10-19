@@ -1,0 +1,99 @@
+.backdrop-container {
+  width: 100vw;
+  height: 100vh;
+}
+.color-1,.color-2,.color-3 {
+  position: fixed;
+  opacity: 0.5;
+  filter: blur(60px);
+  z-index: -100;
+} 
+
+@function shadow($color) {
+  @return 0 0 45vmax 45vmax #{$color};
+}
+
+@keyframes hueRotate{
+  to{
+    filter: hue-rotate(360deg);
+  }
+}
+@keyframes colour-1 {
+  0% {
+    top: 0vh;
+    left: 50vw;
+  }
+  25% {
+    left: 0vw;
+  }
+  50% {
+    top: 100vh;
+  }
+  75% {
+    left: 100vw;
+  }
+  100% {
+    top: 0vh;
+    left: 50vw;
+  }
+}
+
+@keyframes colour-2 {
+  0% {
+    top: 50vh;
+    left: 100vw;
+  }
+  25% {
+    top: 100vh;
+  }
+  50% {
+    left: 0vw;
+  }
+  75% {
+    top: 0vh;
+  }
+  100% {
+    top: 50vh;
+    left: 100vw;
+  }
+}
+
+@keyframes colour-3 {
+  0% {
+    top: 100vh;
+    left: 50vw;
+  }
+  25% {
+    left: 100vw;
+  }
+  50% {
+    top: 0vh;
+  }
+  75% {
+    left: 0vw;
+  }
+  100% {
+    top: 100vh;
+    left: 50vw;
+  }
+}
+
+.color-1 {
+  box-shadow: shadow(#39008c);
+  animation: hueRotate 10s 0s linear infinite, colour-1 19s 0s linear infinite;
+}
+
+.color-2 {
+  box-shadow: shadow(#152630);
+  animation: hueRotate 15s 0s linear infinite, colour-2 25s 0s linear infinite;
+}
+
+.color-3 {
+  box-shadow: shadow(#18181b);
+  animation: hueRotate 20s 0s linear infinite, colour-3 15s 0s linear infinite;
+}
+
+.children{
+  z-index: 10;
+  color: white;
+}
