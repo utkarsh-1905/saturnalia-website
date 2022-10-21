@@ -2,6 +2,9 @@ import Backdrop from "./components/Backdrop/Backdrop";
 import Landing from "./Pages/Landing";
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import Navbar from "./components/Navbar";
+import Events from "./components/Events/Events";
+import Sponsors from "./components/Sponsors/Sponsors";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -12,7 +15,11 @@ function App() {
         <ParallaxLayer offset={0} speed={17}>
           <Landing />
         </ParallaxLayer>
-        <Backdrop></Backdrop>
+        <Backdrop>
+          <Events />
+          <Sponsors />
+          <Footer />
+        </Backdrop>
       </Parallax>
       <Navbar />
     </div>

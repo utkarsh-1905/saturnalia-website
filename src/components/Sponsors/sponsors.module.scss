@@ -1,0 +1,33 @@
+.container{
+    width: auto;
+    height: auto;
+    background-color: transparent;
+}
+
+.sponsorsHeading{
+    font-family: 'BatmanForeverOutline', sans-serif;
+    font-family: 'BatmanForeverAlternate', sans-serif;
+    font-size: 4rem;
+    text-align: center;
+    user-select: none;
+}
+
+.sponsorsTicker{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 85vw;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 500px) {
+    .sponsorsHeading{
+        font-size: 3rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    .sponsorsHeading{
+        font-size: 2rem;
+    }
+}
