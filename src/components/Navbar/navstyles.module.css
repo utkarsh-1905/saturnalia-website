@@ -1,0 +1,95 @@
+/* Contains Navbar and other stuff */
+.footer{
+    height: 20vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+/* Navbar Styling */
+.navbar{
+    height: 7vh;
+    width: 100vw;
+    position: fixed;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* background-image: linear-gradient(to bottom, #000000e3, #000000df,#000000aa, #0b0b3fa9); */
+    background-image: url(./assets/nav.svg);
+    background-size: 100%;
+    background-repeat: none;
+}
+
+.navLeft{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+    margin-left: 5rem;
+}
+
+/* Button Tray */
+.buttonTray{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 20%;
+}
+
+.loginButton{
+    background: linear-gradient(180deg, #39008C 0%, #00FFFF 100%);
+    width: 160px;
+    height: 120%;
+    border: none;
+    font-family: 'SevenSegment';
+    color: white;
+    /* box-shadow: -2px 5px #5f93e05a; */
+    font-size: 2rem;
+}
+
+.loginButton:active{
+    outline: 1px solid #2ca0e94f;
+    transform: translateY(2px) translateZ(-1px);
+    box-shadow: 0px 0px #0e5cd163;
+}
+
+.navRight{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 35%;
+    margin-right: 5rem;
+}
+
+
+
+.navlink{
+    font-family: 'Poppins', sans-serif;
+    font-size: 150%;
+    text-decoration: none;
+    color: white;
+}
+
+.navlink:hover {
+    text-decoration: underline;
+    background: linear-gradient(to bottom, #FFF 20%, rgb(229, 229, 224) 20%, rgb(4, 155, 210) 60%, rgb(0, 180, 246) 80%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 0.1s linear infinite;
+}
+
+

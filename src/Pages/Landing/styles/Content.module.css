@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+@font-face {
+    font-family: 'SevenSegment';
+    src: url(../assets/fonts/SevenSegment.ttf);
+}
+
+.contentBody{
+    background: url(../assets/background.png) black;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+/* Contains the main Saturnalia Logo */
+
+.content{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Logo Styling */
+.logo{
+    display: flex;
+    width: 60rem;   
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    animation: fadeInLeft 1s linear 1;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+    0% {
+       opacity: 1;
+       transform: translateY(-20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+}  
+
+@keyframes shine {
+    to {
+        background-position: 700% center;
+    }
+}
+ 
