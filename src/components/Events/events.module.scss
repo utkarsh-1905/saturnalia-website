@@ -3,6 +3,14 @@
     height: 100vh;
 }
 
+.eventHeading{
+    font-family: 'BatmanForeverOutline', sans-serif;
+    font-family: 'BatmanForeverAlternate', sans-serif;
+    font-size: 4rem;
+    text-align: center;
+    user-select: none;
+}
+
 .groundmesh{
     display: fixed;
     position: absolute;
@@ -20,5 +28,11 @@
 @media screen and (max-width: 576px){
     .groundmesh{
         height: 30%;
+    }
+}
+
+@media screen and (max-width: 360px){
+    .eventHeading{
+         font-size: 3rem;
     }
 }
