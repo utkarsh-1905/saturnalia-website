@@ -1,0 +1,85 @@
+/*Including dafont */
+@font-face {
+    font-family: SevenSegment;
+    src: url('./fonts/SevenSegment.ttf');
+}
+
+.register-form-input{
+    border-style: solid;
+    border-radius: 10px;
+    width: 35vw;
+    height: 3vw;
+    font-size: 20px;
+}
+
+.register-form{
+    width: 38vw;
+    background-color: black;
+}
+
+.register-button-submit{
+ 
+    --background-color: linear-gradient(180deg, #39008C 0%, #00FFFF 100%);
+    --border-color:linear-gradient(to bottom right ,red,blue);
+    --border-width:.5em;
+    --edge-size:.5em;
+    font-family: SevenSegment;
+    font-weight:400;
+    font-size: 30px;
+    margin-top: 10px;
+    color: white;
+    display:inline-grid;
+    padding: 0.5em 1.5em;
+    border:0;
+    background:var(--background-color);
+    clip-path: polygon(23% 0, 80% 0%, 100% 0, 100% 57%, 80% 100%, 0 100%, 0% 80%, 0 40%);
+}
+
+
+
+.register-button-submit:hover{
+    cursor: pointer;
+}
+
+.register-form-input:focus{
+outline: none;
+box-shadow: 0px 0px 2px 2px blue;
+}
+
+.label-choose-file{
+/* border-style: solid; */
+padding: 10px;
+}
+
+.choose-file{
+    border-style: solid;
+    background-color: #fff;
+    border-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    height: 30px;
+    width: 30vw;
+    font-size: 20px;
+}
+
+
+@media screen and (max-width:1050px){
+    .register-form-input{
+        width: 270px;
+        height:50px;
+        font-size: 15px;
+    }
+    .register-form{
+        width: 350px;
+
+    }
+    .register-button-submit{
+        font-size: 15px;
+    }
+    .choose-file{
+        height: 25px;
+        width: 240px;
+        font-size: 15px;
+    }
+    
+}
