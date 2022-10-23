@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import backgroundStyles from './styles/Background.module.css'
 import contentStyles from './styles/Content.module.css'
 import logo from './assets/logo.svg'
-import Stars from '../../components/Stars/Stars'
+import navStyles from '../../components/Navbar/navstyles.module.css'
 
 export default function Landing() {
+  const [isMobileView, setIsMobileView] = useState(false);
+  useEffect(()=>{
+    if(window.innerWidth < 768){
+        setIsMobileView(true);
+    }
+  }, [])
   return (
     <>
         {/* <Stars /> */}
@@ -21,6 +27,15 @@ export default function Landing() {
                 />
                 {/* Register now button (more can be added) */}
             </div>
+            {isMobileView && (
+                <div className={contentStyles.buttonTray}>
+                    <button
+                            className={navStyles.loginButton}
+                        >
+                        <em>LOG IN</em>
+                    </button>
+                </div>
+            )}
         </div>
     </>
   )
