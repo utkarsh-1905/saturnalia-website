@@ -55,6 +55,7 @@
     color: white;
     /* box-shadow: -2px 5px #5f93e05a; */
     font-size: 2rem;
+    clip-path: polygon(23% 0, 80% 0%, 100% 0, 100% 57%, 80% 100%, 0 100%, 0% 80%, 0 40%);
 }
 
 .loginButton:active{
