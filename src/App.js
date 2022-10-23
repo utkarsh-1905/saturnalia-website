@@ -11,14 +11,15 @@ function App() {
     <div className="App">
       <Parallax pages={2} style={{ top: "0", left: "0" }}>
         <ParallaxLayer offset={0} speed={17}>
-          <Landing />
+          {/* <Landing /> */}
+          <Backdrop>
+            <Landing />
+            <Events />
+            <Sponsors />
+            <Footer />
+          </Backdrop>
         </ParallaxLayer>
       </Parallax>
-      <Backdrop>
-        <Events />
-        <Sponsors />
-        <Footer />
-      </Backdrop>
       <Navbar />
     </div>
   );

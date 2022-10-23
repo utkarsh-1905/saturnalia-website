@@ -7,7 +7,7 @@ import Stars from '../../components/Stars/Stars'
 export default function Landing() {
   return (
     <>
-        <Stars />
+        {/* <Stars /> */}
         {/* <div className={backgroundStyles.background}></div> */}
         <div className={contentStyles.contentBody}>
             <div 

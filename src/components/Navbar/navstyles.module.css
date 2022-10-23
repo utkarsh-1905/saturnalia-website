@@ -15,7 +15,7 @@
 /* Navbar Styling */
 .navbar{
     height: 7vh;
-    width: 100vw;
+    width: 80vw;
     position: fixed;
     padding: 1rem;
     display: flex;
