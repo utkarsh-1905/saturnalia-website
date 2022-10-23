@@ -48,7 +48,7 @@
 
 .loginButton{
     background: linear-gradient(180deg, #39008C 0%, #00FFFF 100%);
-    width: 160px;
+    width: 200px;
     height: 120%;
     border: none;
     font-family: 'SevenSegment';
@@ -143,5 +143,8 @@
     }
     .hide{
         display: none;
+    }
+    .loginButton{
+        width: fit-content;
     } 
 }

@@ -11,8 +11,8 @@ function App() {
     <div className="App">
       <Backdrop>
         <Landing />
-        <Events />
-        <Sponsors />
+        {/* <Events /> */}
+        {/* <Sponsors /> */}
         <Footer />
       </Backdrop>
       <Navbar />

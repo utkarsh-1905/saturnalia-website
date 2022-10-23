@@ -22,7 +22,7 @@ export default function Navbar() {
                 <button
                     className={navStyles.loginButton}
                 >
-                    <em>LOG IN</em>
+                    <em>Coming Soon</em>
                 </button>
             </div>
             <div className={navStyles.navRight}>

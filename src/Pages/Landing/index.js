@@ -32,7 +32,7 @@ export default function Landing() {
                     <button
                             className={navStyles.loginButton}
                         >
-                        <em>LOG IN</em>
+                        <em>Coming Soon</em>
                     </button>
                 </div>
             )}
