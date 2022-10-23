@@ -1,0 +1,159 @@
+@font-face {
+    font-family: SevenSegment;
+    src: url(./fonts/SevenSegment.ttf);
+}
+
+.event-card-container{
+    /* border-style: solid; */
+    width:430px;
+    height: 550px;
+    clip-path: polygon(20% 0%, 100% 0, 100% 20%, 100% 90%, 80% 100%, 20% 100%, 0 100%, 0 10%);
+    background-color: rgba(0, 0, 0, 0.274);
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.active-button-div{
+    justify-content: right;
+    text-align: right;
+    /* border-style: solid;
+    border-color: red; */
+}
+
+.active-button{
+    height: 30px;
+    width: 100px;
+    font-size: 15px;
+    color:white;
+    background-color: #35B050;
+    font-weight: 600;
+    border-width: 0;
+}
+
+.event-img-div{
+    border-style: solid;
+    margin-top: 10px;
+    height: 280px;
+}
+
+.event-name{
+    margin-top: -10px;
+    justify-content: left;
+    text-align: left;
+    color: white;
+}
+
+.event-content{
+    margin-top: -10px;
+}
+
+.event-date-and-register{
+    display: flex;
+}
+
+.event-dates-venue{
+    /* border-style: solid; */
+    margin-top: 20px;
+    line-height: 1px;
+    color:white;
+}
+
+.event-dates-venue h4{
+    margin-top: -10px;
+}
+
+.event-card-button-div{
+   /* border-style: solid; */
+   margin-left: 100px;
+   
+   
+}
+
+.card-event-register{
+    --background-color: linear-gradient(180deg, #39008C 0%, #00FFFF 100%);
+    --border-color:linear-gradient(to bottom right ,red,blue);
+    --border-width:.5em;
+    --edge-size:.5em;
+    width: 180px;
+    font-family: SevenSegment;
+    font-weight:400;
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+    display:inline-grid;
+    padding: 0.5em 1.5em;
+    border:0;
+    background:var(--background-color);
+    margin-top: 30px;
+    clip-path: polygon(10% 0, 80% 0%, 100% 0, 100% 60%, 90% 100%, 20% 100%, 0 100%, 0 40%);
+
+}
+
+.card-event-register:hover{
+    cursor: pointer;
+}
+
+.event-card-date{
+    font-size: 20px;
+}
+
+.event-card-time{
+    font-size: 20px;
+}
+
+.event-card-location{
+    font-size: 20px;
+    margin-left: -15px;
+}
+
+.event-card-icons{
+    margin-bottom: -3.5px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width:1050px){
+    .event-card-container{
+        height: 350px;
+        width: 230px;
+    }
+    .active-button{
+        height: 20px;
+        width: 60px;
+        font-size: 9px;
+    }
+    .event-name{
+        font-size: 9px;
+    }
+    .event-dates-venue h4{
+       font-size: 10px;
+    }
+    .event-dates-venue{
+        /* border-style: solid; */
+        width: 800px;
+    }
+    .card-event-register{
+       
+        width: 90px;
+        height: 30px;
+        font-size: 10px;
+        padding:10px;
+
+    }
+    .event-card-icons{
+        margin-right: 80px;
+        transform: scale(0.7);
+        margin-bottom: -10px;
+    }
+    .event-card-location{
+        margin-left: 0px;
+    }
+    .event-card-button-div{
+        margin-left: 20px;
+    }
+   
+    
+}
