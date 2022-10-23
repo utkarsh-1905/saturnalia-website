@@ -35,6 +35,18 @@
     animation: fadeInLeft 1s linear 1;
 }
 
+/* Media Queries */
+@media screen and (max-width: 768px){
+    .logo{
+        width: 20rem;
+    }
+    .content{
+        background: url(../assets/backPhone.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
 /* Animations */
 @keyframes fadeInLeft {
     0% {

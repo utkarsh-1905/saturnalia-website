@@ -93,4 +93,46 @@
     animation: shine 0.1s linear infinite;
 }
 
-
+@media screen and (max-width: 768px){
+    .footer{
+        height: 40vh;
+        align-items: center;
+    }
+    .navbar{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: 40vh;
+        top: 0;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #001c8cb4;
+    }
+    .loginButton{
+        display: none;
+    }
+    .navLeft{
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 0;
+    }
+    .navRight{
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-right: 0;
+    }
+    .navlink{
+        font-size: 100%;
+    }
+    .buttonTray{
+        height: 0;
+    }
+    .hide{
+        display: none;
+    } 
+}
