@@ -14,9 +14,9 @@ export default function Navbar() {
     <div className={navStyles.footer}>
         {(!isMobileView)?(<div className={[navStyles.navbar]}>
             <div className={navStyles.navLeft}>
-                <a className={navStyles.navlink} href="">Home</a>
-                <a className={navStyles.navlink} href="">Events</a>
-                <a className={navStyles.navlink} href="">Features</a>
+                <a className={navStyles.navlink} href="">_____</a>
+                <a className={navStyles.navlink} href="">_____</a>
+                <a className={navStyles.navlink} href="">_____</a>
             </div>
             <div className={navStyles.buttonTray}>
                 <button
@@ -26,9 +26,9 @@ export default function Navbar() {
                 </button>
             </div>
             <div className={navStyles.navRight}>
-                <a className={navStyles.navlink} href="">Sponsors</a>
-                <a className={navStyles.navlink} href="">FAQS</a>
-                <a className={navStyles.navlink} href="">Contact Us</a>
+                <a className={navStyles.navlink} href="">_____</a>
+                <a className={navStyles.navlink} href="">_____</a>
+                <a className={navStyles.navlink} href="">_____</a>
             </div>
         </div>):(
             <>
@@ -42,14 +42,14 @@ export default function Navbar() {
                 {
                     (isOpen) && (
                         <div className={navStyles.navbar}>
-                            <div className={navStyles.navLeft}>
-                                <a className={navStyles.navlink} href="">Home</a>
-                                <a className={navStyles.navlink} href="">Events</a>
-                                <a className={navStyles.navlink} href="">Features</a>
-                                <a className={navStyles.navlink} href="">Sponsors</a>
-                                <a className={navStyles.navlink} href="">FAQS</a>
-                                <a className={navStyles.navlink} href="">Contact Us</a>
-                            </div> 
+                            {/* <div className={navStyles.navLeft}> */}
+                                {/* <a className={navStyles.navlink} href="">Home</a> */}
+                                {/* <a className={navStyles.navlink} href="">Events</a> */}
+                                {/* <a className={navStyles.navlink} href="">Features</a> */}
+                                {/* <a className={navStyles.navlink} href="">Sponsors</a>
+                                <a className={navStyles.navlink} href="">FAQS</a> */}
+                                {/* <a className={navStyles.navlink} href="">Contact Us</a> */}
+                            {/* </div>  */}
                         </div>
                     )
                 }

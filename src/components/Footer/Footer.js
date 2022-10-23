@@ -15,10 +15,10 @@ const Footer = () => {
     <div className={styles.container}>
       <div className={styles.left}>
         <img src={Logo} alt="Saturnalia 2022" />
-        <p className={styles.footerInfo}>
+        {/* <p className={styles.footerInfo}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
           vulputate libero et velit interdum, ac aliquet odio mattis.
-        </p>
+        </p> */}
         <div className={styles.logos}>
           <img src={Facebook} alt="Facebook" />
           <img src={Instagram} alt="Instagram" />
@@ -32,20 +32,20 @@ const Footer = () => {
         <div>
           <p>
             {" "}
-            <EmailIcon className={styles.contactIcons} /> abc@gmail.com{" "}
+            <EmailIcon className={styles.contactIcons} /> saturnalia@thapar.edu{" "}
           </p>
-          <p>
+          {/* <p>
             {" "}
             <EmailIcon className={styles.contactIcons} /> xyz@gmail.com{" "}
-          </p>
+          </p> */}
           <p>
             {" "}
-            <CallIcon className={styles.contactIcons} /> 123456789
+            <CallIcon className={styles.contactIcons} /><br />&nbsp;&nbsp;Rishab Jain <br />&nbsp;&nbsp;+91 85328 69741 
           </p>
-          <p>
+          {/* <p>
             {" "}
             <CallIcon className={styles.contactIcons} /> 123456789
-          </p>
+          </p> */}
         </div>
         <motion.button
           className={styles.toTop}
