@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Parallax pages={2} style={{ top: "0", left: "0" }}>
-        <ParallaxLayer offset={0} speed={17}>
+        <ParallaxLayer offset={0} speed={2}>
           {/* <Landing /> */}
           <Backdrop>
             <Landing />

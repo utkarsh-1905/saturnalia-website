@@ -40,6 +40,7 @@
     justify-content: center;
     align-items: center;
     user-select: none;
+    z-index: 2;
     animation: fadeInLeft 1s linear 1;
 }
 
