@@ -1,7 +1,8 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './ThaparForm.css'
+import Axios from 'axios'
 
 const NonThapar = () => {
     //States :
@@ -9,6 +10,8 @@ const NonThapar = () => {
     const [rollNo,setRollNo]=useState('');
     const [branch,setBranch]=useState('');
     const [yearOfStudy,setYearOfStudy]=useState();
+    const [imageSelected,setImageSelected]=useState("");
+    const [uploadedImgURL,setUploadedImgURL]=useState('');
 
 
     const defaultValues={
@@ -33,8 +36,32 @@ const NonThapar = () => {
         setCollegeName(values.collegeName);
         setRollNo(values.rollNo);
         setYearOfStudy(values.yearOfStudy);
+        uploadImage();
         // console.log('Values :',branch,collegeName,rollNo,yearOfStudy)
     }
+
+    //Cloudinary Code :
+    const uploadImage=()=>{
+        // console.log(files[0]);
+        const formData=new FormData();
+        formData.append("file",imageSelected);
+        formData.append("upload_preset","sa3qpzmd");
+    
+        const cloudinary_Cloud_Name="dv7jje0bw";
+    
+        Axios.post(`https://api.cloudinary.com/v1_1/${cloudinary_Cloud_Name}/image/upload`,formData).then((response)=>{
+          console.log(response.data);
+          console.log(response.data.secure_url);
+          setUploadedImgURL(response.data.secure_url);
+        });
+      }
+
+      useEffect(()=>{
+        console.log('Link is :',uploadedImgURL);
+      },[uploadedImgURL])
+
+      
+
 
   return (
     <>
@@ -68,7 +95,7 @@ const NonThapar = () => {
             <ErrorMessage name='yearOfStudy'/>
         </p>
         <div className='label-choose-file' style={{color:'white'}} htmlFor='file-label'>Upload ID Proof</div>
-        <input className='choose-file' name="file-label" type="file"/><br/>
+        <input className='choose-file' name="file-label" type="file" onChange={(e)=>{setImageSelected(e.target.files[0])}}/><br/>
 
         <button className='register-button-submit' type="submit">Register Now</button>
         </Form>
