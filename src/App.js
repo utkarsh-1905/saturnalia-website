@@ -5,12 +5,14 @@ import Navbar from "./components/Navbar";
 import Events from "./components/Events/Events";
 import Sponsors from "./components/Sponsors/Sponsors";
 import Footer from "./components/Footer/Footer";
+import Highlights from './components/Highlights/Highlights'
 
 function App() {
   return (
     <div className="App">
       <Backdrop>
         <Landing />
+        <Highlights/>
         <Events />
         <Sponsors />
         <Footer />
