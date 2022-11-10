@@ -3,6 +3,7 @@ import styles from "./events.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/css";
+import EventCard from '../../components/events-card/EventCard';
 
 const Events = () => {
   return (
@@ -11,9 +12,18 @@ const Events = () => {
       <div className={styles.groundmesh}></div>
       <div className={styles.swiperContainer}>
         <Swiper spaceBetween={50} slidesPerView={3}>
-          <SwiperSlide>1</SwiperSlide>
-          <SwiperSlide>2</SwiperSlide>
-          <SwiperSlide>3</SwiperSlide>
+          <SwiperSlide>
+            <EventCard />
+          </SwiperSlide>
+          <SwiperSlide>
+            <EventCard />
+          </SwiperSlide>
+          <SwiperSlide>
+            <EventCard />
+          </SwiperSlide>
+          <SwiperSlide>
+            <EventCard />
+          </SwiperSlide>
         </Swiper>
       </div>
     </div>
