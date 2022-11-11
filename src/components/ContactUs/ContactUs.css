@@ -1,7 +1,7 @@
 /*Including dafont */
 @font-face {
     font-family: SevenSegment;
-    src: url('./fonts/SevenSegment.ttf');
+    src: url('./fonts/ss.ttf');
 }
 
 .register-form-input{
