@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import person from '../../assets/unkown.jpg'
 import'./highlights.css'
 
 const Highlights = () => {
@@ -12,7 +13,7 @@ const Highlights = () => {
     <div className='highlights-horizontal-flex'>
     <div className='left-div'>
       <div className='left-div-content'>
-        <h1>Left DIv</h1>
+        <img className='left-div-content-img' src={person}/>
         </div>
         
     </div>
