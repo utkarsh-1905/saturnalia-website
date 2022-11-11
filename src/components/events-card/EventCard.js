@@ -9,12 +9,18 @@ import axios from 'axios';
 const EventCard = ({event}) => {
   console.log(event);
   const register = () => {
-    axios.post('https://api.saturnaliatiet.com/event/register/'+event.id, {
-        event_id: event._id
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token fda851cb2f548d07d40f82ded3d93e6ad05a8239'
+    }      
+    axios.post('https://api.saturnaliatiet.com/event/register/', {
+        event_id: event.id
+        },{
+            headers: headers
         }).then(res => {
             console.log(res);
-        }).caytch(err => {
-            console.log(err)
+        }).catch(err => {
+            alert("You need to login first to register for this event!")
         })
   }
   return (
@@ -25,11 +31,11 @@ const EventCard = ({event}) => {
                {event.is_active ? (
                     <button className='active-button'>Active</button>
                ):(
-                    <button className='inactive-button'>Inactive</button>
+                    <button className='inactive-button'>TBA</button>
                )}
             </div>
             <div className='event-img-div'>
-                {/*Image Here */}
+                <img src={event.image} className='event-image' />
             </div>
             <div className='event-name'>
                 <h1>{event.name}</h1>
