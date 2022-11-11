@@ -4,9 +4,9 @@ import'./highlights.css'
 
 const Highlights = () => {
 
-  useEffect(()=>{
-  console.log(window.innerWidth,window.innerHeight);
-  },[])
+  // useEffect(()=>{
+  // console.log(window.innerWidth,window.innerHeight);
+  // },[])
 
   return (
     <div className='container'>    

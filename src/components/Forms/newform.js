@@ -91,6 +91,7 @@ const NewForm = (props) => {
       await uploadImage();
     } else {
       setFormData({ ...formData, id_proof: "" });
+      // console.log(formData);
     }
   }
 
@@ -271,7 +272,7 @@ const NewForm = (props) => {
             <Button
               variant="contained"
               sx={{ marginTop: "1rem" }}
-              onClick={handleForm}
+              onClick={()=>handleForm() && submitForm()}
             >
               Submit
             </Button>
