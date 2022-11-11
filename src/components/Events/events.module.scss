@@ -1,6 +1,6 @@
 .container{
     width: 100vw;
-    height: 100vh;
+    height: auto;
 }
 
 .eventHeading{
@@ -28,8 +28,13 @@
 .swiperContainer{
     width: 100%;
     height: 100%;
-    margin: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
     z-index: 1;
+
+    .swiperCard{
+
+    }
 }
 
 @media screen and (max-width: 576px){
