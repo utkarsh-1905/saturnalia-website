@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   Box,
@@ -16,25 +16,48 @@ import {
 import modalStyles from "./modal.module.scss";
 import * as yup from "yup";
 
-import NonThapar from "../Forms/NonThapar";
+import axios from "axios";
 
-const newform = () => {
-  const [loginModal, setLoginModal] = useState(false);
+const NewForm = (props) => {
   const [getRoll, setGetRoll] = useState(false);
 
   const [formData, setFormData] = useState({ is_thaparian: false });
   const [fileSelected, setFileSelected] = useState(null);
   const [formValidError, setFormValidError] = useState(false);
   const [errors, setErrors] = useState("");
-  function handleModal() {
-    setLoginModal(!loginModal);
-  }
+  const [imageSelected, setImageSelected] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+
+  const uploadImage = async () => {
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    formData.append("upload_preset", "sa3qpzmd");
+
+    const cloudinary_Cloud_Name = "dv7jje0bw";
+
+    await axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${cloudinary_Cloud_Name}/image/upload`,
+        formData
+      )
+      .then((response) => {
+        // console.log(response.data);
+        // console.log(response.data.secure_url);
+        // setUploadedImgURL(response.data.secure_url);
+        // setFormData({ ...formData, id_proof: response.data.secure_url });
+        setImgUrl(response.data.secure_url);
+      });
+  };
 
   const formSchema = yup.object().shape({
     name: yup
       .string()
       .max(150, "Name should not be more than 150 characters")
       .required("Name is required"),
+    password: yup
+      .string()
+      .min(8, "Password should be atleast 8 characters")
+      .required("Password is required"),
     email: yup.string().email().required("Email is required"),
     phone_no: yup
       .string()
@@ -53,15 +76,38 @@ const newform = () => {
         .max(350, "College name should be less then 250 characters")
         .required("College name is required"),
     }),
-    id_proof: yup.mixed().required("ID proof is required"),
+    id_proof: yup
+      .string()
+      .when("is_thaparian", {
+        is: false,
+        then: yup.string().url().required("ID proof is required"),
+      })
+      .default(""),
   });
 
-  function handleForm() {
+  useEffect(() => {
+    console.log("Link is :", formData.id_proof);
+    setFormData({ ...formData, id_proof: imgUrl });
+    validateForm();
+  }, [imgUrl]);
+
+  async function handleForm() {
+    //getRoll if for isThaparian or not
+    if (!getRoll) {
+      await uploadImage();
+    } else {
+      setFormData({ ...formData, id_proof: "" });
+      validateForm();
+    }
+  }
+
+  function validateForm() {
+    console.log(formData);
     formSchema
       .validate(formData, { abortEarly: false })
       .then((valid) => {
-        console.log(valid);
         setFormValidError(false);
+        console.log(valid);
       })
       .catch((e) => {
         e.inner.forEach((error) => {
@@ -74,6 +120,11 @@ const newform = () => {
         }, 2000);
       });
   }
+
+  async function submitForm(data) {
+    console.log(data);
+  }
+
   const modalStyle = {
     position: "absolute",
     top: "50%",
@@ -86,8 +137,8 @@ const newform = () => {
   };
 
   return (
-    <div>
-      <Modal open={loginModal} onClose={handleModal}>
+    <div className={modalStyles.container}>
+      <Modal open={props.open} onClose={() => props.close(false)}>
         <Box sx={modalStyle}>
           <Typography variant="h6" component="h1" align="center">
             Register
@@ -112,6 +163,16 @@ const newform = () => {
                 sx={{ width: "100%" }}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
+                }
+              />
+              <TextField
+                variant="outlined"
+                label="Password"
+                type="password"
+                required
+                sx={{ width: "100%" }}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
                 }
               />
               <TextField
@@ -179,36 +240,41 @@ const newform = () => {
                   }
                 />
               ) : (
-                <TextField
-                  variant="outlined"
-                  label="College"
-                  type="string"
-                  sx={{ width: "100%" }}
-                  required={!getRoll}
-                  onChange={(e) =>
-                    !getRoll
-                      ? setFormData({ ...formData, college: e.target.value })
-                      : setFormData({ ...formData, college: null })
-                  }
-                />
+                <>
+                  <TextField
+                    variant="outlined"
+                    label="College"
+                    type="string"
+                    sx={{ width: "100%" }}
+                    required={!getRoll}
+                    onChange={(e) =>
+                      !getRoll
+                        ? setFormData({ ...formData, college: e.target.value })
+                        : setFormData({ ...formData, college: null })
+                    }
+                  />
+                  <Button
+                    variant="outlined"
+                    component="label"
+                    color="warning"
+                    sx={{ width: "100%" }}
+                    onChange={(e) => {
+                      // setFormData({ ...formData, id_proof: e.target.files[0] });
+                      console.log(e);
+                      setImageSelected(e.target.files[0]);
+                      setFileSelected(true);
+                    }}
+                  >
+                    <input type="file" hidden required /> Upload College ID
+                  </Button>
+                  {fileSelected && (
+                    <FormHelperText>
+                      {imageSelected.name} is selected
+                    </FormHelperText>
+                  )}
+                </>
               )}
             </div>
-            <Button
-              variant="outlined"
-              component="label"
-              color="warning"
-              onChange={(e) => {
-                setFormData({ ...formData, id_proof: e.target.files[0] });
-                setFileSelected(true);
-              }}
-            >
-              <input type="file" hidden required /> Upload College ID
-            </Button>
-            {fileSelected && (
-              <FormHelperText>
-                {formData.id_proof.name} is selected
-              </FormHelperText>
-            )}
             <Button
               variant="contained"
               sx={{ marginTop: "1rem" }}
@@ -226,4 +292,4 @@ const newform = () => {
   );
 };
 
-export default newform;
+export default NewForm;

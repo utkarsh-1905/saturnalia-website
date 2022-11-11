@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import navStyles from "./navstyles.module.css";
 import { Sling as Hamburger } from "hamburger-react";
-import ThaparForm from "../Forms/ThaparForm";
-import NonThapar from "../Forms/NonThapar";
+import NewForm from "../Forms/NewForm";
 
 export default function Navbar() {
   const [isMobileView, setIsMobileView] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     if (window.innerWidth <= 768) {
       setIsMobileView(true);
@@ -29,7 +28,10 @@ export default function Navbar() {
             </a>
           </div>
           <div className={navStyles.buttonTray}>
-            <button className={navStyles.loginButton}>
+            <button
+              className={navStyles.loginButton}
+              onClick={() => setOpenModal(true)}
+            >
               <em>LOG IN</em>
             </button>
           </div>
@@ -76,6 +78,7 @@ export default function Navbar() {
           )}
         </>
       )}
+      <NewForm open={openModal} close={setOpenModal} />
     </div>
   );
 }
