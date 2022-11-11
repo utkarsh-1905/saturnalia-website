@@ -1,12 +1,15 @@
 .backdrop-container {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
+  z-index: -1000;
+  position: relative;
 }
+
 .color-1,.color-2,.color-3 {
   position: fixed;
   opacity: 0.5;
   filter: blur(60px);
-  z-index: -100;
+  z-index: -1000;
 } 
 
 @function shadow($color) {

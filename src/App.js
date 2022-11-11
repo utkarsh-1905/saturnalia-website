@@ -5,14 +5,28 @@ import Navbar from "./components/Navbar";
 import Events from "./components/Events/Events";
 import Sponsors from "./components/Sponsors/Sponsors";
 import Footer from "./components/Footer/Footer";
+import Highlights from "./components/Highlights/Highlights";
+import NonThapar from "./components/ContactUs/ContactUs";
 
 function App() {
   return (
     <div className="App">
       <Backdrop>
-        <Landing />
-        <Events />
-        <Sponsors />
+        <section id="landing">
+          <Landing />
+        </section>
+        <section id="highlights">
+          <Highlights />
+        </section>
+        <section id="events">
+          <Events />
+        </section>
+        <section id="sponsor">
+          <Sponsors />
+        </section>
+        {/* <section id="contac"> */}
+        {/* <NonThapar /> */}
+        {/* </section> */}
         <Footer />
       </Backdrop>
       <Navbar />

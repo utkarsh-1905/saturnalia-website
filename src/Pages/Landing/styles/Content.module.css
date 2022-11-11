@@ -1,76 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 @font-face {
-    font-family: 'SevenSegment';
-    src: url(../assets/fonts/SevenSegment.ttf);
+  font-family: "SevenSegment";
+  src: url(../assets/fonts/SevenSegment.ttf);
 }
 
-.contentBody{
-    background: url(../assets/background.png) black;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+.contentBody {
+  background: url(../assets/background.png) black;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
 }
 /* Contains the main Saturnalia Logo */
 
-.content{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.content {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.buttonTray{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 20vh;
+.buttonTray {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 20vh;
 }
-
 
 /* Logo Styling */
-.logo{
-    display: flex;
-    width: 60rem;   
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    z-index: 2;
-    animation: fadeInLeft 1s linear 1;
+.logo {
+  display: flex;
+  width: 60rem;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  z-index: 2;
+  animation: fadeInLeft 1s linear 1;
 }
 
 /* Media Queries */
-@media screen and (max-width: 768px){
-    .logo{
-        width: 20rem;
-    }
-    .content{
-        background: url(../assets/backPhone.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 20rem;
+  }
+  .content {
+    background: url(../assets/backPhone.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 }
 
 /* Animations */
 @keyframes fadeInLeft {
-    0% {
-       opacity: 1;
-       transform: translateY(-20px);
-    }
-    100% {
-       opacity: 1;
-       transform: translateY(0);
-    }
-}  
+  0% {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @keyframes shine {
-    to {
-        background-position: 700% center;
-    }
+  to {
+    background-position: 700% center;
+  }
 }
- 
