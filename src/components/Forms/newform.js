@@ -26,27 +26,27 @@ const NewForm = (props) => {
   const [formValidError, setFormValidError] = useState(false);
   const [errors, setErrors] = useState("");
   const [imageSelected, setImageSelected] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+  // const [imgUrl, setImgUrl] = useState("");
 
   const uploadImage = async () => {
-    const formData = new FormData();
-    formData.append("file", imageSelected);
-    formData.append("upload_preset", "sa3qpzmd");
+    const imgData = new FormData();
+    imgData.append("file", imageSelected);
+    imgData.append("upload_preset", "sa3qpzmd");
 
     const cloudinary_Cloud_Name = "dv7jje0bw";
 
-    await axios
-      .post(
-        `https://api.cloudinary.com/v1_1/${cloudinary_Cloud_Name}/image/upload`,
-        formData
-      )
-      .then((response) => {
-        // console.log(response.data);
-        // console.log(response.data.secure_url);
-        // setUploadedImgURL(response.data.secure_url);
-        // setFormData({ ...formData, id_proof: response.data.secure_url });
-        setImgUrl(response.data.secure_url);
-      });
+    const res = await axios.post(
+      `https://api.cloudinary.com/v1_1/${cloudinary_Cloud_Name}/image/upload`,
+      imgData
+    );
+    // setFormData({ ...formData, id_proof: res.data.secure_url });
+    if (res) {
+      console.log(res);
+      let tempdata = { ...formData };
+      tempdata.id_proof = res.data.secure_url;
+      setFormData(tempdata);
+      validateForm(tempdata);
+    }
   };
 
   const formSchema = yup.object().shape({
@@ -85,26 +85,19 @@ const NewForm = (props) => {
       .default(""),
   });
 
-  useEffect(() => {
-    console.log("Link is :", formData.id_proof);
-    setFormData({ ...formData, id_proof: imgUrl });
-    validateForm();
-  }, [imgUrl]);
-
   async function handleForm() {
     //getRoll if for isThaparian or not
     if (!getRoll) {
       await uploadImage();
     } else {
       setFormData({ ...formData, id_proof: "" });
-      validateForm();
     }
   }
 
-  function validateForm() {
-    console.log(formData);
+  function validateForm(data) {
+    console.log(data);
     formSchema
-      .validate(formData, { abortEarly: false })
+      .validate(data, { abortEarly: false })
       .then((valid) => {
         setFormValidError(false);
         console.log(valid);
