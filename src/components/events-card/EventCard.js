@@ -4,9 +4,19 @@ import './EventCard.css'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import axios from 'axios';
 
 const EventCard = ({event}) => {
   console.log(event);
+  const register = () => {
+    axios.post('https://api.saturnaliatiet.com/event/register/'+event.id, {
+        event_id: event._id
+        }).then(res => {
+            console.log(res);
+        }).caytch(err => {
+            console.log(err)
+        })
+  }
   return (
     <div>
         <div className='event-card-container'>
@@ -34,7 +44,7 @@ const EventCard = ({event}) => {
                     <h4 className='event-card-location' ><LocationOnIcon className='event-card-icons' /> Venue : {event.venue ? event.venue : "TBA"}</h4>
                 </div>
                 <div className='event-card-button-div'>
-                    <button className='card-event-register'>Register Now</button>
+                    {event.registration_allowed && <button className='card-event-register' onClick={register}>Register Now</button>}
                 </div>
             </div>
         </div>

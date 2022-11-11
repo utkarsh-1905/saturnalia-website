@@ -11,10 +11,18 @@ function App() {
   return (
     <div className="App">
       <Backdrop>
-        <Landing />
-        <Highlights/>
-        <Events />
-        <Sponsors />
+        <section id="landing">
+          <Landing />
+        </section>
+        <section id="highlights">
+          <Highlights/>
+        </section>
+        <section id="events">
+          <Events />
+        </section>
+        <section id="sponsor">
+          <Sponsors />
+        </section>
         <Footer />
       </Backdrop>
       <Navbar />
