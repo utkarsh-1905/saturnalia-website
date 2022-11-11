@@ -23,6 +23,9 @@ const EventCard = ({event}) => {
             alert("You need to login first to register for this event!")
         })
   }
+  const openModal = () => {
+    
+  }
   return (
     <div>
         <div className='event-card-container'>
@@ -40,7 +43,7 @@ const EventCard = ({event}) => {
             <div className='event-name'>
                 <h1>{event.name}</h1>
                 <p className='event-content'>
-                    {event.description.substring(0, 100)}...<a>more</a>
+                    {event.description.substring(0, 100)}...<a style={{'cursor':'pointer'}} onClick={openModal} >more</a>
                 </p>
             </div>
             <div className='event-date-and-register'>

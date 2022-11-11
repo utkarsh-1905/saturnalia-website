@@ -10,7 +10,7 @@ import Highlights from './components/Highlights/Highlights'
 function App() {
   return (
     <div className="App">
-      <Backdrop>
+      <Backdrop>  
         <section id="landing">
           <Landing />
         </section>
