@@ -194,7 +194,23 @@ const NewForm = (props) => {
           localStorage.setItem("token", res.data.key);
           document.location.reload();
         })
-        .catch((e) => {alert("Wrong email or password.")})
+        .catch((e) => {
+          if(e.response.status == 400) {
+            setErrors((prev) => "Invalid credentials");
+            setFormValidError(true);
+            setTimeout(() => {
+              setFormValidError(false);
+              setErrors("");
+            }, 5000);
+          }else if(e.response.status == 401){
+            setErrors((prev) => "Account not verified");
+            setFormValidError(true);
+            setTimeout(() => {
+              setFormValidError(false);
+              setErrors("");
+            }, 5000);
+          }
+        })
         // axios.get("https://api.saturnaliatiet.com/auth/api-key/", {
         //  "email": loginData.email,
         //  "password": loginData.password
