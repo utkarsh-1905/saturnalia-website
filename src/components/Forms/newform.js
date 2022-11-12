@@ -185,7 +185,6 @@ const NewForm = (props) => {
       .then((valid) => {
         setFormValidError(false);
         console.log(valid);
-        console.log("Data", loginData);
         const body = {}
         body.email = loginData.email;
         body.password = loginData.password;
@@ -196,7 +195,7 @@ const NewForm = (props) => {
         })
         .catch((e) => {
           if(e.response.status == 400) {
-            setErrors((prev) => "Invalid credentials");
+            setErrors((prev) => e.response.data["error"]);
             setFormValidError(true);
             setTimeout(() => {
               setFormValidError(false);

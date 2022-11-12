@@ -25,7 +25,7 @@ const EventCard = ({ event }) => {
       };
       axios(config)
       .then(function (response) {
-        alert("You have successfully registered for the event!")
+        alert("You have successfully registered for the event! Please check your mail for further details.")
       })
       .catch(function (error) {
         alert(error.response.data["error"])
