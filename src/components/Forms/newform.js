@@ -39,13 +39,14 @@ const NewForm = (props) => {
       `https://api.cloudinary.com/v1_1/${cloudinary_Cloud_Name}/image/upload`,
       imgData
     );
-    // setFormData({ ...formData, id_proof: res.data.secure_url });
+    setFormData({ ...formData, id_proof: res.data.secure_url });
     if (res) {
       console.log(res);
       let tempdata = { ...formData };
       tempdata.id_proof = res.data.secure_url;
       setFormData(tempdata);
       validateForm(tempdata);
+      console.log(formData)
     }
   };
 
@@ -101,7 +102,8 @@ const NewForm = (props) => {
       .validate(data, { abortEarly: false })
       .then((valid) => {
         setFormValidError(false);
-        console.log(valid);
+        console.log('Valid :',valid);
+         submitForm(data);
       })
       .catch((e) => {
         e.inner.forEach((error) => {
@@ -113,10 +115,14 @@ const NewForm = (props) => {
           setErrors("");
         }, 2000);
       });
+
   }
 
   async function submitForm(data) {
     console.log(data);
+    const register=await axios.post('https://api.saturnaliatiet.com/auth/register/',{data});
+    console.log(register);
+
   }
 
   const modalStyle = {
@@ -272,7 +278,7 @@ const NewForm = (props) => {
             <Button
               variant="contained"
               sx={{ marginTop: "1rem" }}
-              onClick={()=>handleForm() && submitForm()}
+              onClick={()=>handleForm()}
             >
               Submit
             </Button>
