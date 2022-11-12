@@ -25,6 +25,7 @@ const NewForm = (props) => {
   const [fileSelected, setFileSelected] = useState(null);
   const [formValidError, setFormValidError] = useState(false);
   const [errors, setErrors] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
   const [imageSelected, setImageSelected] = useState("");
   // const [imgUrl, setImgUrl] = useState("");
 
@@ -41,9 +42,9 @@ const NewForm = (props) => {
     );
     // setFormData({ ...formData, id_proof: res.data.secure_url });
     if (res) {
-      console.log(res);
       let tempdata = { ...formData };
       tempdata.id_proof = res.data.secure_url;
+      tempdata.roll_no = "";
       setFormData(tempdata);
       validateForm(tempdata);
     }
@@ -65,17 +66,23 @@ const NewForm = (props) => {
       .max(15, "Phone number should be less than 15 characters")
       .required("Phone number is required"),
     is_thaparian: yup.boolean().required("Please select an option"),
-    roll_no: yup.string().when("is_thaparian", {
-      is: true,
-      then: yup.string().required("Roll number is required"),
-    }),
-    college: yup.string().when("is_thaparian", {
-      is: false,
-      then: yup
-        .string()
-        .max(350, "College name should be less then 250 characters")
-        .required("College name is required"),
-    }),
+    roll_no: yup
+      .string()
+      .when("is_thaparian", {
+        is: true,
+        then: yup.string().required("Roll number is required"),
+      })
+      .default(""),
+    college: yup
+      .string()
+      .when("is_thaparian", {
+        is: false,
+        then: yup
+          .string()
+          .max(350, "College name should be less then 250 characters")
+          .required("College name is required"),
+      })
+      .default(""),
     id_proof: yup
       .string()
       .when("is_thaparian", {
@@ -90,17 +97,20 @@ const NewForm = (props) => {
     if (!getRoll) {
       await uploadImage();
     } else {
-      setFormData({ ...formData, id_proof: "" });
+      let tempdata = { ...formData };
+      tempdata.id_proof = "";
+      tempdata.college = "";
+      setFormData(tempdata);
+      validateForm(tempdata);
     }
   }
 
   function validateForm(data) {
-    console.log(data);
     formSchema
       .validate(data, { abortEarly: false })
       .then((valid) => {
         setFormValidError(false);
-        console.log(valid);
+        submitForm(data);
       })
       .catch((e) => {
         e.inner.forEach((error) => {
@@ -115,7 +125,45 @@ const NewForm = (props) => {
   }
 
   async function submitForm(data) {
-    console.log(data);
+    const body = new FormData();
+    body.set("email", data.email);
+    body.set("name", data.name);
+    body.set("password", data.password);
+    body.set("phone_no", data.phone_no);
+    body.set("is_thaparian", data.is_thaparian);
+    body.set("roll_no", data.roll_no);
+    body.set("college", data.college);
+    body.set("id_proof", data.id_proof);
+    let res;
+    try {
+      res = await axios.post(
+        "https://api.saturnaliatiet.com/auth/register/",
+        body,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    } catch (e) {
+      console.log(e);
+      if (e.response.status >= 400) {
+        Object.keys(e.response.data.errors).forEach((key) => {
+          setErrors((prev) => prev + e.response.data.errors[key] + " , ");
+        });
+        setFormValidError(true);
+        setTimeout(() => {
+          setFormValidError(false);
+          setErrors("");
+        }, 5000);
+      }
+      return;
+    }
+    setShowSuccess(true);
+    setTimeout(() => {
+      setShowSuccess(false);
+      props.handleClose();
+    }, 6000);
   }
 
   const modalStyle = {
@@ -278,6 +326,12 @@ const NewForm = (props) => {
           </FormControl>
           <Snackbar open={formValidError}>
             <Alert severity="error">{errors}</Alert>
+          </Snackbar>
+          <Snackbar open={showSuccess}>
+            <Alert severity="success">
+              You are registered!! Click the link received in the mail to
+              verify.
+            </Alert>
           </Snackbar>
         </Box>
       </Modal>
