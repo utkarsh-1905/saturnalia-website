@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import navStyles from "./navstyles.module.css";
 import { Sling as Hamburger } from "hamburger-react";
-import NewForm from "../Forms/NewForm";
+import NewForm from "../Forms/newform";
 
 export default function Navbar() {
   const [isMobileView, setIsMobileView] = useState(false);
@@ -28,12 +28,20 @@ export default function Navbar() {
             </a>
           </div>
           <div className={navStyles.buttonTray}>
-            <button
+            {!localStorage.getItem("token") ? (<button
               className={navStyles.loginButton}
               onClick={() => setOpenModal(true)}
             >
-              <em>LOG IN</em>
-            </button>
+              <em>SIGN UP</em>
+            </button>) : (
+            <button 
+              className={navStyles.loginButton}
+              onClick={() => {
+                document.location.href = "/#events";
+              }}
+            >
+              <em>Explore</em>
+            </button>)}
           </div>
           <div className={navStyles.navRight}>
             <a className={navStyles.navlink} href="#sponsor">

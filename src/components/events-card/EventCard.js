@@ -9,26 +9,30 @@ import axios from "axios";
 const EventCard = ({ event }) => {
   console.log(event);
   const register = () => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: "Token fda851cb2f548d07d40f82ded3d93e6ad05a8239",
-    };
-    axios
-      .post(
-        "https://api.saturnaliatiet.com/event/register/",
-        {
-          event_id: event.id,
+    console.log(localStorage.getItem("token"));
+    if(localStorage.getItem("token")){
+      console.log(event.id)
+      var data = new FormData()
+      data.append("event", event.id)
+      var config = {
+        method: 'post',
+        url: 'https://api.saturnaliatiet.com/event/register/',
+        headers: { 
+          'Authorization': 'Token ' + localStorage.getItem('token'),
+          'Content-Type': 'multipart/form-data'
         },
-        {
-          headers: headers,
-        }
-      )
-      .then((res) => {
-        console.log(res);
+        data : data
+      };
+      axios(config)
+      .then(function (response) {
+        alert("You have successfully registered for the event! Please check your mail for further details.")
       })
-      .catch((err) => {
-        alert("You need to login first to register for this event!");
+      .catch(function (error) {
+        alert(error.response.data["error"])
       });
+      }else{
+        alert("You need to login first to register for this event!");
+      }
   };
   const openModal = () => {};
   return (
