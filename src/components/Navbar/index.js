@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import navStyles from "./navstyles.module.css";
 import { Sling as Hamburger } from "hamburger-react";
-import NewForm from "../Forms/newform";
+import NewForm from "../Forms/NewForm";
 
 export default function Navbar() {
   const [isMobileView, setIsMobileView] = useState(false);

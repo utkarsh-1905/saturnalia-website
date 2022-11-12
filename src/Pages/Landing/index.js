@@ -3,9 +3,11 @@ import contentStyles from "./styles/Content.module.css";
 import logo from "./assets/logo.svg";
 import navStyles from "../../components/Navbar/navstyles.module.css";
 import Stars from "../../components/Stars/Stars";
-
+import NewForm from "../../components/Forms/NewForm";
 export default function Landing() {
   const [isMobileView, setIsMobileView] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
   useEffect(() => {
     if (window.innerWidth < 768) {
       setIsMobileView(true);
@@ -26,11 +28,15 @@ export default function Landing() {
         </div>
         {isMobileView && (
           <div className={contentStyles.buttonTray}>
-            <button className={navStyles.loginButton}>
+            <button
+              className={navStyles.loginButton}
+              onClick={() => setOpenModal(true)}
+            >
               <em>LOG IN</em>
             </button>
           </div>
         )}
+        <NewForm open={openModal} close={setOpenModal} />
       </div>
     </>
   );

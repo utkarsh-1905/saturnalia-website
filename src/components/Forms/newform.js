@@ -12,6 +12,8 @@ import {
   FormHelperText,
   Alert,
   Snackbar,
+  Tab,
+  Tabs,
 } from "@mui/material";
 import modalStyles from "./modal.module.scss";
 import * as yup from "yup";
@@ -27,7 +29,9 @@ const NewForm = (props) => {
   const [errors, setErrors] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [imageSelected, setImageSelected] = useState("");
-  // const [imgUrl, setImgUrl] = useState("");
+
+  const [tabs, setTabs] = useState(1);
+  const [loginData, setLoginData] = useState({});
 
   const uploadImage = async () => {
     const imgData = new FormData();
@@ -91,6 +95,14 @@ const NewForm = (props) => {
         then: yup.string().url().required("ID proof is required"),
       })
       .default(""),
+  });
+
+  const loginSchema = yup.object().shape({
+    email: yup.string().email().required("Email is required"),
+    password: yup
+      .string()
+      .min(8, "Min. 8 characters")
+      .required("Password is required"),
   });
 
   async function handleForm() {
@@ -167,6 +179,25 @@ const NewForm = (props) => {
     }, 6000);
   }
 
+  async function handleLogin() {
+    loginSchema
+      .validate(loginData, { abortEarly: false })
+      .then((valid) => {
+        setFormValidError(false);
+        console.log(valid);
+      })
+      .catch((e) => {
+        e.inner.forEach((error) => {
+          setErrors((prev) => prev + error.message + " , ");
+        });
+        setFormValidError(true);
+        setTimeout(() => {
+          setFormValidError(false);
+          setErrors("");
+        }, 3000);
+      });
+  }
+
   const modalStyle = {
     position: "absolute",
     top: "50%",
@@ -182,149 +213,203 @@ const NewForm = (props) => {
     <div className={modalStyles.container}>
       <Modal open={props.open} onClose={() => props.close(false)}>
         <Box sx={modalStyle}>
-          <Typography variant="h6" component="h1" align="center">
-            Register
-          </Typography>
-          <FormControl sx={{ width: "100%" }}>
-            <div className={modalStyles.formContainer}>
-              <TextField
-                variant="outlined"
-                label="Email"
-                type="email"
-                sx={{ width: "100%" }}
-                required
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-              />
-              <TextField
-                variant="outlined"
-                label="Name"
-                type="string"
-                required
-                sx={{ width: "100%" }}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-              />
-              <TextField
-                variant="outlined"
-                label="Password"
-                type="password"
-                required
-                sx={{ width: "100%" }}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-              />
-              <TextField
-                variant="outlined"
-                label="Phone Number"
-                required
-                type="number"
-                sx={{ width: "100%" }}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone_no: e.target.value })
-                }
-              />
-              <RadioGroup
-                sx={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <label>Are you from Thapar?</label>
-                <FormControlLabel
-                  value="thaparian"
-                  control={
-                    <Radio
-                      onClick={() => setGetRoll(true)}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          is_thaparian: e.target.checked,
-                        })
-                      }
-                    />
-                  }
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value="non-thaparian"
-                  control={
-                    <Radio
-                      onClick={() => setGetRoll(false)}
-                      checked={!getRoll}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          is_thaparian: e.target.checked,
-                        })
-                      }
-                    />
-                  }
-                  label="No"
-                />
-              </RadioGroup>
-              {getRoll ? (
+          <Tabs
+            value={tabs}
+            onChange={() => {
+              if (tabs === 1) {
+                setTabs(2);
+              } else {
+                setTabs(1);
+              }
+            }}
+            variant="fullWidth"
+            indicatorColor="info"
+            textColor="primary"
+          >
+            <Tab label="Login" value={1} />
+            <Tab label="Register" value={2} />
+          </Tabs>
+          {/* <Typography variant="h6" component="h1" align="center">
+              Register
+            </Typography> */}
+          {tabs === 2 && (
+            <FormControl sx={{ width: "100%" }}>
+              <div className={modalStyles.formContainer}>
                 <TextField
                   variant="outlined"
-                  label="Roll Number"
-                  type="number"
+                  label="Email"
+                  type="email"
                   sx={{ width: "100%" }}
-                  required={getRoll}
+                  required
                   onChange={(e) =>
-                    getRoll
-                      ? setFormData({ ...formData, roll_no: e.target.value })
-                      : setFormData({ ...formData, roll_no: null })
+                    setFormData({ ...formData, email: e.target.value })
                   }
                 />
-              ) : (
-                <>
+                <TextField
+                  variant="outlined"
+                  label="Name"
+                  type="string"
+                  required
+                  sx={{ width: "100%" }}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
+                <TextField
+                  variant="outlined"
+                  label="Password"
+                  type="password"
+                  required
+                  sx={{ width: "100%" }}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                />
+                <TextField
+                  variant="outlined"
+                  label="Phone Number"
+                  required
+                  type="number"
+                  sx={{ width: "100%" }}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone_no: e.target.value })
+                  }
+                />
+                <RadioGroup
+                  sx={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <label>Are you from Thapar?</label>
+                  <FormControlLabel
+                    value="thaparian"
+                    control={
+                      <Radio
+                        onClick={() => setGetRoll(true)}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            is_thaparian: e.target.checked,
+                          })
+                        }
+                      />
+                    }
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="non-thaparian"
+                    control={
+                      <Radio
+                        onClick={() => setGetRoll(false)}
+                        checked={!getRoll}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            is_thaparian: e.target.checked,
+                          })
+                        }
+                      />
+                    }
+                    label="No"
+                  />
+                </RadioGroup>
+                {getRoll ? (
                   <TextField
                     variant="outlined"
-                    label="College"
-                    type="string"
+                    label="Roll Number"
+                    type="number"
                     sx={{ width: "100%" }}
-                    required={!getRoll}
+                    required={getRoll}
                     onChange={(e) =>
-                      !getRoll
-                        ? setFormData({ ...formData, college: e.target.value })
-                        : setFormData({ ...formData, college: null })
+                      getRoll
+                        ? setFormData({ ...formData, roll_no: e.target.value })
+                        : setFormData({ ...formData, roll_no: null })
                     }
                   />
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    color="warning"
-                    sx={{ width: "100%" }}
-                    onChange={(e) => {
-                      // setFormData({ ...formData, id_proof: e.target.files[0] });
-                      console.log(e);
-                      setImageSelected(e.target.files[0]);
-                      setFileSelected(true);
-                    }}
-                  >
-                    <input type="file" hidden required /> Upload College ID
-                  </Button>
-                  {fileSelected && (
-                    <FormHelperText>
-                      {imageSelected.name} is selected
-                    </FormHelperText>
-                  )}
-                </>
-              )}
-            </div>
-            <Button
-              variant="contained"
-              sx={{ marginTop: "1rem" }}
-              onClick={() => handleForm()}
-            >
-              Submit
-            </Button>
-          </FormControl>
+                ) : (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      label="College"
+                      type="string"
+                      sx={{ width: "100%" }}
+                      required={!getRoll}
+                      onChange={(e) =>
+                        !getRoll
+                          ? setFormData({
+                              ...formData,
+                              college: e.target.value,
+                            })
+                          : setFormData({ ...formData, college: null })
+                      }
+                    />
+                    <Button
+                      variant="outlined"
+                      component="label"
+                      color="warning"
+                      sx={{ width: "100%" }}
+                      onChange={(e) => {
+                        // setFormData({ ...formData, id_proof: e.target.files[0] });
+                        console.log(e);
+                        setImageSelected(e.target.files[0]);
+                        setFileSelected(true);
+                      }}
+                    >
+                      <input type="file" hidden required /> Upload College ID
+                    </Button>
+                    {fileSelected && (
+                      <FormHelperText>
+                        {imageSelected.name} is selected
+                      </FormHelperText>
+                    )}
+                  </>
+                )}
+              </div>
+              <Button
+                variant="contained"
+                sx={{ marginTop: "1rem" }}
+                onClick={() => handleForm()}
+              >
+                Submit
+              </Button>
+            </FormControl>
+          )}
+          {tabs === 1 && (
+            <Box>
+              <form>
+                <TextField
+                  variant="outlined"
+                  label="Email"
+                  type="string"
+                  required
+                  sx={{ width: "100%", marginBottom: 2, marginTop: 2 }}
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, email: e.target.value })
+                  }
+                />
+                <TextField
+                  variant="outlined"
+                  label="Password"
+                  type="password"
+                  required
+                  sx={{ width: "100%" }}
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, password: e.target.value })
+                  }
+                />
+                <Button
+                  variant="contained"
+                  sx={{ marginTop: "1rem", width: "100%" }}
+                  onClick={() => handleLogin()}
+                >
+                  Submit
+                </Button>
+              </form>
+            </Box>
+          )}
           <Snackbar open={formValidError}>
             <Alert severity="error">{errors}</Alert>
           </Snackbar>
