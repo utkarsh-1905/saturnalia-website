@@ -1,5 +1,6 @@
 .container{
     margin-top: 2rem;
+    padding-bottom: 4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -85,7 +86,14 @@
     }
 }
 
+@media screen and (max-width: 768px){
+    .container{
+        padding-bottom: 0;
+    }
+}
+
 @media screen and (max-width:400px){
+
     .right,.left{
         font-size: 0.8rem;
         padding: 0.20rem;
