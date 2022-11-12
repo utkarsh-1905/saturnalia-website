@@ -37,7 +37,7 @@ const NonThapar = () => {
   return (
     <>
        
-    <div style={{display:'flex',flexDirection:'column'}}>
+    <div className='contact-us-form'>
 
        <Formik 
     //    initialValues={defaultValues}

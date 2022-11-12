@@ -6,7 +6,7 @@ import Events from "./components/Events/Events";
 import Sponsors from "./components/Sponsors/Sponsors";
 import Footer from "./components/Footer/Footer";
 import Highlights from "./components/Highlights/Highlights";
-import ContactUs from "./components/ContactUs/ContactUs";
+import ContactUsMain from "./components/ContactUs/ContactUsmain";
 
 function App() {
   return (
@@ -24,8 +24,8 @@ function App() {
         <section id="sponsor">
           <Sponsors />
         </section>
-        <section id="contac"> 
-        <ContactUs />
+        <section id="contact-us"> 
+        {/* <ContactUsMain /> */}
         </section>
         <Footer />
       </Backdrop>

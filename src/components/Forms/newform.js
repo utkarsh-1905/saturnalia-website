@@ -40,13 +40,14 @@ const NewForm = (props) => {
       `https://api.cloudinary.com/v1_1/${cloudinary_Cloud_Name}/image/upload`,
       imgData
     );
-    // setFormData({ ...formData, id_proof: res.data.secure_url });
+    setFormData({ ...formData, id_proof: res.data.secure_url });
     if (res) {
       let tempdata = { ...formData };
       tempdata.id_proof = res.data.secure_url;
       tempdata.roll_no = "";
       setFormData(tempdata);
       validateForm(tempdata);
+      console.log(formData);
     }
   };
 
@@ -319,7 +320,7 @@ const NewForm = (props) => {
             <Button
               variant="contained"
               sx={{ marginTop: "1rem" }}
-              onClick={handleForm}
+              onClick={() => handleForm()}
             >
               Submit
             </Button>
