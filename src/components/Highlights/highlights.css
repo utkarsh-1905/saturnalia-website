@@ -330,7 +330,7 @@
     .left-div-content-img{
         width: 300px;
         height: 180px;
-        margin-left: 22px;
+        margin-left: 0px;
         background-size: 300px;
     }
 
@@ -347,14 +347,14 @@
         /* border-style: solid; */
         width: 300px;
         height: 100px;
-        margin-left: 30px;
+        margin-left: 10px;
         margin-top: 10px;
         }
 
     .eventHeading{
         font-size: 1.5rem;
         margin-top: -30px;
-        margin-left: 10px;
+        margin-left: -30px;
     }
 
     .container{
