@@ -185,6 +185,22 @@ const NewForm = (props) => {
       .then((valid) => {
         setFormValidError(false);
         console.log(valid);
+        console.log("Data", loginData);
+        const body = {}
+        body.email = loginData.email;
+        body.password = loginData.password;
+        axios.post("https://api.saturnaliatiet.com/auth/api-key/", body)
+        .then((res) => {
+          localStorage.setItem("token", res.data.key);
+          document.location.reload();
+        })
+        .catch((e) => {alert("Wrong email or password.")})
+        // axios.get("https://api.saturnaliatiet.com/auth/api-key/", {
+        //  "email": loginData.email,
+        //  "password": loginData.password
+        //}).then((res)=>{
+        //  console.log(res.data)
+        //}).catch((err)=>console.log(err))
       })
       .catch((e) => {
         e.inner.forEach((error) => {
