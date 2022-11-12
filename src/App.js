@@ -21,12 +21,10 @@ function App() {
         <section id="events">
           <Events />
         </section>
-        <section id="sponsor">
+        {/* <section id="sponsor">
           <Sponsors />
-        </section>
-        <section id="contact-us"> 
-        {/* <ContactUsMain /> */}
-        </section>
+        </section> */}
+        <section id="contact-us">{/* <ContactUsMain /> */}</section>
         <Footer />
       </Backdrop>
       <Navbar />
