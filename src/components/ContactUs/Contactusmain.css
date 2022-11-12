@@ -1,0 +1,22 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    /* border-style: solid;
+    border-color: red; */
+}
+
+.main{
+    width: 100%;
+    display: flex;
+}
+
+
+svg{
+        width: 50%;
+        height:50%
+    }
+
+.contact-us-main{
+    display: flex;
+    flex-wrap: wrap;
+}
