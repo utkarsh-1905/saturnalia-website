@@ -7,27 +7,40 @@ import Sponsors from "./components/Sponsors/Sponsors";
 import Footer from "./components/Footer/Footer";
 import Highlights from "./components/Highlights/Highlights";
 import ContactUsMain from "./components/ContactUs/ContactUsmain";
+import { Routes, Route } from "react-router-dom";
+import EmailVerified from "./components/email-verified/index";
 
 function App() {
   return (
     <div className="App">
-      <Backdrop>
-        <section id="landing">
-          <Landing />
-        </section>
-        <section id="highlights">
-          <Highlights />
-        </section>
-        <section id="events">
-          <Events />
-        </section>
-        {/* <section id="sponsor">
+      <Routes>
+        <Route path="/verification" element={<EmailVerified />} />
+        <Route
+          path="/"
+          exact
+          element={
+            <>
+              <Backdrop>
+                <section id="landing">
+                  <Landing />
+                </section>
+                <section id="highlights">
+                  <Highlights />
+                </section>
+                <section id="events">
+                  <Events />
+                </section>
+                {/* <section id="sponsor">
           <Sponsors />
         </section> */}
-        <section id="contact-us">{/* <ContactUsMain /> */}</section>
-        <Footer />
-      </Backdrop>
-      <Navbar />
+                <section id="contact-us">{/* <ContactUsMain /> */}</section>
+                <Footer />
+              </Backdrop>
+              <Navbar />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }
