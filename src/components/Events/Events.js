@@ -6,8 +6,11 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import EventCard from "../../components/events-card/EventCard";
 import axios from "axios";
+import { useMediaQuery } from "@mui/material";
 
 const Events = () => {
+  const md = useMediaQuery("max-width:768px");
+  const sm = useMediaQuery("max-width:576px");
   const [events, setEvents] = useState(null);
   const [ev, setEv] = useState(true);
 
@@ -47,7 +50,13 @@ const Events = () => {
       <div className={styles.swiperContainer}>
         <Swiper
           spaceBetween={40}
-          slidesPerView={3}
+          slidesPerView={() => {
+            if (sm) {
+              return 1;
+            } else if (md) {
+              return 2;
+            } else return 3;
+          }}
           modules={[Autoplay, Keyboard, Navigation, Scrollbar, Pagination]}
           navigation
           scrollbar={{ draggable: true }}

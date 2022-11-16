@@ -28,7 +28,7 @@ const Footer = () => {
       </div>
       <div className={styles.right}>
         <h4>Contact Us</h4>
-        <p>Have Queries? Reach out to use anytime! </p>
+        <p>Have Queries? Reach out to us anytime! </p>
         <div>
           <p>
             {" "}

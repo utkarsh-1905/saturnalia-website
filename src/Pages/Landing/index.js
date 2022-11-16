@@ -4,8 +4,11 @@ import logo from "./assets/logo.svg";
 import navStyles from "../../components/Navbar/navstyles.module.css";
 import Stars from "../../components/Stars/Stars";
 import NewForm from "../../components/Forms/newform";
+import { useMediaQuery } from "@mui/material";
+
 export default function Landing() {
   const [isMobileView, setIsMobileView] = useState(false);
+  // const isMobileView = useMediaQuery("max-width: 768px");
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {

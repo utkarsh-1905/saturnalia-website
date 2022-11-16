@@ -20,6 +20,11 @@ import * as yup from "yup";
 
 import axios from "axios";
 
+import SittingMan from "./sittingBhoot.svg";
+import { Container } from "@mui/system";
+
+import { useCookies } from "react-cookie";
+
 const NewForm = (props) => {
   const [getRoll, setGetRoll] = useState(false);
 
@@ -32,6 +37,8 @@ const NewForm = (props) => {
 
   const [tabs, setTabs] = useState(1);
   const [loginData, setLoginData] = useState({});
+
+  const [cookie, setCookie] = useCookies(["authToken"]);
 
   const uploadImage = async () => {
     const imgData = new FormData();
@@ -185,31 +192,36 @@ const NewForm = (props) => {
       .then((valid) => {
         setFormValidError(false);
         console.log(valid);
-        const body = {}
+        const body = {};
         body.email = loginData.email;
         body.password = loginData.password;
-        axios.post("https://api.saturnaliatiet.com/auth/api-key/", body)
-        .then((res) => {
-          localStorage.setItem("token", res.data.key);
-          document.location.reload();
-        })
-        .catch((e) => {
-          if(e.response.status == 400) {
-            setErrors((prev) => e.response.data["error"]);
-            setFormValidError(true);
-            setTimeout(() => {
-              setFormValidError(false);
-              setErrors("");
-            }, 5000);
-          }else if(e.response.status == 401){
-            setErrors((prev) => "Account not verified");
-            setFormValidError(true);
-            setTimeout(() => {
-              setFormValidError(false);
-              setErrors("");
-            }, 5000);
-          }
-        })
+        axios
+          .post("https://api.saturnaliatiet.com/auth/api-key/", body)
+          .then((res) => {
+            // localStorage.setItem("token", res.data.key);
+            setCookie("authToken", res.data.key, {
+              path: "/",
+              maxAge: 3600 * 24 * 3,
+            });
+            document.location.reload();
+          })
+          .catch((e) => {
+            if (e.response.status == 400) {
+              setErrors((prev) => e.response.data["error"]);
+              setFormValidError(true);
+              setTimeout(() => {
+                setFormValidError(false);
+                setErrors("");
+              }, 5000);
+            } else if (e.response.status == 401) {
+              setErrors((prev) => "Account not verified");
+              setFormValidError(true);
+              setTimeout(() => {
+                setFormValidError(false);
+                setErrors("");
+              }, 5000);
+            }
+          });
         // axios.get("https://api.saturnaliatiet.com/auth/api-key/", {
         //  "email": loginData.email,
         //  "password": loginData.password
@@ -235,7 +247,9 @@ const NewForm = (props) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "background.paper",
+    // bgcolor: "background.paper",
+    backgroundColor:
+      "linear-gradient(180deg, #1C1C1C 0%, rgba(18, 18, 18, 0.65) 100%)",
     boxShadow: 24,
     p: 4,
   };
@@ -243,7 +257,14 @@ const NewForm = (props) => {
   return (
     <div className={modalStyles.container}>
       <Modal open={props.open} onClose={() => props.close(false)}>
-        <Box sx={modalStyle}>
+        <Box
+          sx={modalStyle}
+          style={{
+            background:
+              "linear-gradient(180deg, #1C1C1C 0%, rgba(18, 18, 18, 0.65) 100%)",
+            color: "#fff",
+          }}
+        >
           <Tabs
             value={tabs}
             onChange={() => {
@@ -257,12 +278,9 @@ const NewForm = (props) => {
             indicatorColor="info"
             textColor="primary"
           >
-            <Tab label="Login" value={1} />
-            <Tab label="Register" value={2} />
+            <Tab label="Login" sx={{ color: "white" }} value={1} />
+            <Tab label="Register" sx={{ color: "white" }} value={2} />
           </Tabs>
-          {/* <Typography variant="h6" component="h1" align="center">
-              Register
-            </Typography> */}
           {tabs === 2 && (
             <FormControl sx={{ width: "100%" }}>
               <div className={modalStyles.formContainer}>
@@ -270,7 +288,11 @@ const NewForm = (props) => {
                   variant="outlined"
                   label="Email"
                   type="email"
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                  }}
                   required
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -281,7 +303,11 @@ const NewForm = (props) => {
                   label="Name"
                   type="string"
                   required
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                  }}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
@@ -291,7 +317,11 @@ const NewForm = (props) => {
                   label="Password"
                   type="password"
                   required
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                  }}
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
                   }
@@ -301,7 +331,11 @@ const NewForm = (props) => {
                   label="Phone Number"
                   required
                   type="number"
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                  }}
                   onChange={(e) =>
                     setFormData({ ...formData, phone_no: e.target.value })
                   }
@@ -352,7 +386,11 @@ const NewForm = (props) => {
                     variant="outlined"
                     label="Roll Number"
                     type="number"
-                    sx={{ width: "100%" }}
+                    sx={{
+                      width: "100%",
+                      backgroundColor: "#fff",
+                      borderRadius: "8px",
+                    }}
                     required={getRoll}
                     onChange={(e) =>
                       getRoll
@@ -366,7 +404,11 @@ const NewForm = (props) => {
                       variant="outlined"
                       label="College"
                       type="string"
-                      sx={{ width: "100%" }}
+                      sx={{
+                        width: "100%",
+                        backgroundColor: "#fff",
+                        borderRadius: "8px",
+                      }}
                       required={!getRoll}
                       onChange={(e) =>
                         !getRoll
@@ -416,7 +458,13 @@ const NewForm = (props) => {
                   label="Email"
                   type="string"
                   required
-                  sx={{ width: "100%", marginBottom: 2, marginTop: 2 }}
+                  sx={{
+                    width: "100%",
+                    marginBottom: 2,
+                    marginTop: 2,
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                  }}
                   onChange={(e) =>
                     setLoginData({ ...loginData, email: e.target.value })
                   }
@@ -426,7 +474,11 @@ const NewForm = (props) => {
                   label="Password"
                   type="password"
                   required
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    borderRadius: "8px",
+                  }}
                   onChange={(e) =>
                     setLoginData({ ...loginData, password: e.target.value })
                   }
@@ -450,6 +502,9 @@ const NewForm = (props) => {
               verify.
             </Alert>
           </Snackbar>
+          <Container>
+            {/* <img src={SittingMan} alt="Man sitting in Saturnalia " /> */}
+          </Container>
         </Box>
       </Modal>
     </div>
