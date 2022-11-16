@@ -51,6 +51,7 @@
     border:0;
     background:var(--background-color);
     margin-left: 13px;
+    width: 150px;
     /* margin-left: 0.8vw; */
 
 }
