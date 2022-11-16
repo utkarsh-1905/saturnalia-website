@@ -12,7 +12,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1e1e1e;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 code {
@@ -20,6 +20,6 @@ code {
     monospace;
 }
 
-.App{
+.App {
   scrollbar-color: rgb(48, 192, 227) black;
 }

@@ -28,24 +28,36 @@ const Footer = () => {
       </div>
       <div className={styles.right}>
         <h4>Contact Us</h4>
-        <p>Have Queries? Reach out to use anytime! </p>
+        <p>Have Queries? Reach out to us anytime! </p>
         <div>
           <p>
             {" "}
-            <EmailIcon className={styles.contactIcons} /> abc@gmail.com{" "}
+            <EmailIcon className={styles.contactIcons} />{" "}
+            <a
+              href="mailto:saturnalia@thapar.edu"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              saturnalia@thapar.edu
+            </a>{" "}
           </p>
-          <p>
+          {/* <p>
             {" "}
             <EmailIcon className={styles.contactIcons} /> xyz@gmail.com{" "}
-          </p>
+          </p> */}
           <p>
             {" "}
-            <CallIcon className={styles.contactIcons} /> 123456789
+            <CallIcon className={styles.contactIcons} />{" "}
+            <a
+              href="tel:8532869741"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              +91 85328 69741
+            </a>
           </p>
-          <p>
+          {/* <p>
             {" "}
             <CallIcon className={styles.contactIcons} /> 123456789
-          </p>
+          </p> */}
         </div>
         {/* <motion.button
           className={styles.toTop}

@@ -9,12 +9,16 @@ import Highlights from "./components/Highlights/Highlights";
 import ContactUsMain from "./components/ContactUs/ContactUsmain";
 import { Routes, Route } from "react-router-dom";
 import EmailVerified from "./components/email-verified/index";
+import Loader from "./components/Loader/loader";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/verification" element={<EmailVerified />} />
+        <Route path="/loading" element={<Loader />} />
+        <Route path="/dashboard" exact element={<Dashboard />} />
         <Route
           path="/"
           exact
