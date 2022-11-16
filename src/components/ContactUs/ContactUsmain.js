@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import ContactUs from './ContactUs'
+import './Contactusmain.css'
 //importing image:
-import Bhoot from '../../assets/bhoot.svg'
+import Bhoot from '../../assets/bhoot.png'
 
 const ContactUsmain = () => {
-  const [height,setHeight]=useState();
+  const [width,setWidth]=useState();
 
   useEffect(()=>{
-    if(window.innerWidth>1000 && window.innerWidth<1920){
-      setHeight(700);
-    }
-    // if(window.innerWidth>1000){
-    //   setHeight(500);
-    // }
+    console.log(window.innerWidth);
+    setWidth(window.innerWidth);
   },[window.innerWidth])
-  
 
   return (
-    <div className='container'>
+    <div className='container-contact'>
+    <h1 className='eventHeading'>Contact Us</h1>
 <div className='main'>
-
-    <img height={height} className='bhoot-svg' src={Bhoot}/>
-    <ContactUs/>   
+  <div className='img-contain'>
+  <img className='bhoot-svg' src={Bhoot}/>
+  </div>
+    <div className='main-contact-form'>
+    <ContactUs/>  
+    </div> 
 
 </div>
     </div>

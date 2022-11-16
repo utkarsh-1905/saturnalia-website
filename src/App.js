@@ -33,7 +33,7 @@ function App() {
                 {/* <section id="sponsor">
           <Sponsors />
         </section> */}
-                <section id="contact-us">{/* <ContactUsMain /> */}</section>
+                <section id="contact-us"><ContactUsMain /></section>
                 <Footer />
               </Backdrop>
               <Navbar />

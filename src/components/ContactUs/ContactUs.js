@@ -11,19 +11,13 @@ const NonThapar = () => {
     const [query,setQuery]=useState('');
 
 
-    // const defaultValues={
-    //     name:'',
-    //     email:'',
-    //     phnNumber:'',
-    // }
+    const defaultValues={
+        name:'',
+        email:'',
+        phnNumber:'',
+    }
 
 
-    // const validationSchema=yup.object().shape({
-    //     name:yup.string().min(7,"*Name is too short").required('*Enter your Name '),
-    //     email:yup.string().email('*Enter a valid e-mail').required('*Enter your e-mail address'),
-    //     phnNumber:yup.string().required('*Enter your phone number ').min(10,'*Enter a valid phone number').max(10,'*Enter a valid phone number'),
-    //     query:yup.string().min(1,'*Enter a valid Year of Study').max(1,'*Enter a valid Year of Study').required('*Enter your Year of Study')
-    // })
 
     //Access the Form Submitted Values from here below :
     const handleSubmit=(values)=>{
@@ -40,8 +34,7 @@ const NonThapar = () => {
     <div className='contact-us-form'>
 
        <Formik 
-    //    initialValues={defaultValues}
-    //    validationSchema={validationSchema}
+       initialValues={defaultValues}
        onSubmit={handleSubmit}
        >
         <Form className='register-form' style={{borderStyle:'solid',padding:'2.5vw'}}>

@@ -1,8 +1,11 @@
-.container{
+.container-contact{
     width: 100vw;
     height: 100vh;
     /* border-style: solid;
     border-color: red; */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
 }
 
 .main{
@@ -11,12 +14,71 @@
 }
 
 
-svg{
-        width: 50%;
-        height:50%
-    }
-
 .contact-us-main{
     display: flex;
     flex-wrap: wrap;
+}
+
+.bhoot-svg{
+height: 570px;
+margin-left: 22.5vw;
+margin-top: 50px;
+/* border-style: solid; */
+}
+
+.img-contain{
+    margin-left: 0vw;
+}
+
+.main-contact-form{
+    margin-left: 7vw;
+}
+
+
+
+@media screen and (max-width:1850px) {
+    .bhoot-svg{
+        height: 500px;
+        margin-left: 18vw;
+        margin-top: 33px;
+    }
+
+    .img-contain{
+        margin-left: 3vw;
+    }
+}
+
+@media screen and (max-width:1600px){
+    .bhoot-svg{
+        margin-left: 13vw;
+    }
+}
+
+@media screen and (max-width:1500px){
+    .bhoot-svg{
+        margin-left: 14vw;
+    }
+}
+
+@media screen and (max-width:1400px){
+    .bhoot-svg{
+        margin-left: 10vw;
+    }
+}
+
+@media screen and (max-width:1300px){
+    .eventHeading{
+        margin-left: 0vw;
+    }
+}
+
+@media screen and (max-width:1200px) {
+   .bhoot-svg{
+    display: none;
+   }
+   .container-contact{
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+   }
 }
