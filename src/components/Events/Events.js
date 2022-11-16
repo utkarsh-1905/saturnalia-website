@@ -30,22 +30,24 @@ const Events = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.eventHeading}>
-        <span
-          onClick={() => {
-            setEv(true);
-          }}
-          className={ev ? styles.active : styles.inactive}
-        >
-          EVENTS
-        </span>{" "}
-        <span
-          onClick={() => setEv(false)}
-          className={!ev ? styles.active : styles.inactive}
-        >
-          COMPETITONS
-        </span>
-      </h1>
+      <div className={styles.eventHeading}>
+        <div className={styles.eventBox}>
+          <span
+            onClick={() => {
+              setEv(true);
+            }}
+            className={ev ? styles.active : styles.inactive}
+          >
+            EVENTS
+          </span>{" "}
+          <span
+            onClick={() => setEv(false)}
+            className={!ev ? styles.active : styles.inactive}
+          >
+            COMPETITONS
+          </span>
+        </div>
+      </div>
       {/* <div className={styles.groundmesh}></div> */}
       <div className={styles.swiperContainer}>
         <Swiper
