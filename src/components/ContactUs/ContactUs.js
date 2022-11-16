@@ -1,13 +1,15 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
 import React, { useState } from 'react'
+import axios from 'axios';
+
 import './ContactUs.css'
 
 const NonThapar = () => {
     //States :
     const [name,setName]=useState('');
     const [email,setEmail]=useState('');
-    const [phnNumber,setPhnNumber]=useState();
+    const [phnNumber,setPhnNumber]=useState(0);
     const [query,setQuery]=useState('');
 
 
@@ -17,15 +19,24 @@ const NonThapar = () => {
         phnNumber:'',
     }
 
+    const sendQuery=async()=>{
+        // console.log(name,email,phnNumber,query);
+        const response=await axios.post('https://api.saturnaliatiet.com/info/query/',{name:name,email:email,phone_no:phnNumber,description:query});
+        const data=await response.data;
+        console.log(data);
+    }
 
 
     //Access the Form Submitted Values from here below :
-    const handleSubmit=(values)=>{
+    const handleSubmit=()=>{
+        
         // console.log('Values : ',values);
-        setPhnNumber(values.phnNumber);
-        setName(values.name);
-        setEmail(values.email);
-        // console.log('Values :',branch,collegeName,rollNo,yearOfStudy)
+        // setPhnNumber(values.phnNumber);
+        // setName(values.name);
+        // setEmail(values.email);
+        // // console.log('Values :',branch,collegeName,rollNo,yearOfStudy)
+        sendQuery();
+
     }
 
   return (
@@ -39,23 +50,23 @@ const NonThapar = () => {
        >
         <Form className='register-form' style={{borderStyle:'solid',padding:'2.5vw'}}>
             <br/>
-        <Field className='register-form-input' style={{paddingLeft:'12px'}} name="name" placeholder="Name"/>
+        <input onChange={(e)=>{setName(e.target.value)}} className='register-form-input' style={{paddingLeft:'12px'}} name="name" placeholder="Name"/>
         {/*Error Message */}
         {/* <p style={{color:'red'}}>
             <ErrorMessage name='name'/>
         </p> */}
-        <Field className='register-form-input' style={{paddingLeft:'12px'}} name="email" placeholder="Email Address"/>
+        <input onChange={(e)=>{setEmail(e.target.value)}} className='register-form-input' style={{paddingLeft:'12px'}} name="email" placeholder="Email Address"/>
         {/*Error Message */}
         {/* <p style={{color:'red'}}>
             <ErrorMessage name='email'/>
         </p> */}
-        <Field className='register-form-input' style={{paddingLeft:'12px'}} name="phnNumber" placeholder="Phone Number"/>
+        <input onChange={(e)=>{setPhnNumber(e.target.value)}} className='register-form-input' style={{paddingLeft:'12px'}} type='number' name="phnNumber" placeholder="Phone Number"/>
         {/*Error Message */}
         {/* <p style={{color:'red'}}>
             <ErrorMessage name='phnNumber'/>
         </p> */}
 
-        <textarea className='query-box' onChange={(e)=>{setQuery(e.target.value)}}  type="text" placeholder='Enter your query' cols="30" rows="8"></textarea>
+        <textarea onChange={(e)=>{setQuery(e.target.value)}} className='query-box' onChange={(e)=>{setQuery(e.target.value)}}  type="text" placeholder='Enter your query' cols="30" rows="8"></textarea>
         <br/>
         <button className='register-button-submit' type="submit">Submit</button>
         <br/>
