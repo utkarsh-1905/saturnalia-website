@@ -14,6 +14,7 @@ import {
   Snackbar,
   Tab,
   Tabs,
+  CircularProgress,
 } from "@mui/material";
 import modalStyles from "./modal.module.scss";
 import * as yup from "yup";
@@ -34,7 +35,7 @@ const NewForm = (props) => {
   const [errors, setErrors] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [imageSelected, setImageSelected] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [tabs, setTabs] = useState(1);
   const [loginData, setLoginData] = useState({});
 
@@ -113,6 +114,7 @@ const NewForm = (props) => {
   });
 
   async function handleForm() {
+    setLoading(true);
     //getRoll if for isThaparian or not
     if (!getRoll) {
       await uploadImage();
@@ -171,6 +173,7 @@ const NewForm = (props) => {
         Object.keys(e.response.data.errors).forEach((key) => {
           setErrors((prev) => prev + e.response.data.errors[key] + " , ");
         });
+        setLoading(false);
         setFormValidError(true);
         setTimeout(() => {
           setFormValidError(false);
@@ -180,6 +183,7 @@ const NewForm = (props) => {
       return;
     }
     setShowSuccess(true);
+    setLoading(false);
     setTimeout(() => {
       setShowSuccess(false);
       props.handleClose();
@@ -187,6 +191,7 @@ const NewForm = (props) => {
   }
 
   async function handleLogin() {
+    setLoading(true);
     loginSchema
       .validate(loginData, { abortEarly: false })
       .then((valid) => {
@@ -199,6 +204,7 @@ const NewForm = (props) => {
           .post("https://api.saturnaliatiet.com/auth/api-key/", body)
           .then((res) => {
             // localStorage.setItem("token", res.data.key);
+            setLoading(false);
             setCookie("authToken", res.data.key, {
               path: "/",
               maxAge: 3600 * 24 * 3,
@@ -206,6 +212,7 @@ const NewForm = (props) => {
             document.location.reload();
           })
           .catch((e) => {
+            setLoading(false);
             if (e.response.status == 400) {
               setErrors((prev) => e.response.data["error"]);
               setFormValidError(true);
@@ -230,6 +237,7 @@ const NewForm = (props) => {
         //}).catch((err)=>console.log(err))
       })
       .catch((e) => {
+        setLoading(false);
         e.inner.forEach((error) => {
           setErrors((prev) => prev + error.message + " , ");
         });
@@ -446,7 +454,7 @@ const NewForm = (props) => {
                 sx={{ marginTop: "1rem" }}
                 onClick={() => handleForm()}
               >
-                Submit
+                {loading ? <CircularProgress color="secondary" /> : "Register"}
               </Button>
             </FormControl>
           )}
@@ -488,7 +496,7 @@ const NewForm = (props) => {
                   sx={{ marginTop: "1rem", width: "100%" }}
                   onClick={() => handleLogin()}
                 >
-                  Submit
+                  {loading ? <CircularProgress color="secondary" /> : "Login"}
                 </Button>
               </form>
             </Box>

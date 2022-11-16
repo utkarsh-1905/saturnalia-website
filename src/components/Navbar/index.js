@@ -4,6 +4,7 @@ import { Sling as Hamburger } from "hamburger-react";
 import NewForm from "../Forms/newform";
 import { useMediaQuery } from "@mui/material";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   // const isMobileView = useMediaQuery("max-width: 768px");
@@ -22,9 +23,9 @@ export default function Navbar() {
       {!isMobileView ? (
         <div className={[navStyles.navbar]}>
           <div className={navStyles.navLeft}>
-            <a className={navStyles.navlink} href="#landing">
+            <Link className={navStyles.navlink} to="/">
               Home
-            </a>
+            </Link>
             <a className={navStyles.navlink} href="#events">
               Events
             </a>
@@ -41,13 +42,10 @@ export default function Navbar() {
                 <em>SIGN UP</em>
               </button>
             ) : (
-              <button
-                className={navStyles.loginButton}
-                onClick={() => {
-                  document.location.href = "/#events";
-                }}
-              >
-                <em>Explore</em>
+              <button className={navStyles.loginButton}>
+                <Link to="/dashboard">
+                  <em style={{ fontSize: "x-large" }}>Dashboard</em>
+                </Link>
               </button>
             )}
           </div>
@@ -71,6 +69,9 @@ export default function Navbar() {
           {isOpen && (
             <div className={navStyles.navbar}>
               <div className={navStyles.navLeft}>
+                <Link className={navStyles.navlink} to="/dashboard">
+                  <em>Explore</em>
+                </Link>
                 <a className={navStyles.navlink} href="">
                   Home
                 </a>

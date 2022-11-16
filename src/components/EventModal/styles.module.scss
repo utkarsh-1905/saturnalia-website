@@ -1,0 +1,36 @@
+.scrollBox::-webkit-scrollbar{
+    width: 2px;
+}
+.scrollBox::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+.scrollBox::-webkit-scrollbar-thumb {
+    background-color: #00003b;
+    border-radius: 50px;
+}
+
+.paperModal{
+    border-right: 5px solid;
+    border-bottom: 5px solid;
+    box-sizing: content-box;
+    border-image:linear-gradient(180deg, #5700D3 0%, #1FAAF8 100%) 30;
+    @media screen and (max-width: 900px){
+        flex-direction: column !important;
+        overflow-y: scroll;
+    }
+    
+}
+
+.showMobile{
+    display: none;
+    @media screen and (max-width: 900px){
+        display: block;
+    }
+}
+
+.hideMobile{
+    display: block;
+    @media screen and (max-width: 900px){
+        display: none;
+    }
+}

@@ -28,15 +28,15 @@ const EventCard = ({ event }) => {
         },
         data: data,
       };
-      // axios(config)
-      //   .then(function (response) {
-      //     alert(
-      //       "You have successfully registered for the event! Please check your mail for further details."
-      //     );
-      //   })
-      //   .catch(function (error) {
-      //     alert(error.response.data["error"]);
-      //   });
+      axios(config)
+        .then(function (response) {
+          alert(
+            "You have successfully registered for the event! Please check your mail for further details."
+          );
+        })
+        .catch(function (error) {
+          alert(error.response.data["error"]);
+        });
     } else {
       alert("You need to login first to register for this event!");
     }
@@ -46,7 +46,6 @@ const EventCard = ({ event }) => {
     <div>
       <div className="event-card-container">
         <div className="active-button-div">
-          {/* <button className='active-button'>{event.is_active ? "Active" : "Inactive"}</button>  */}
           {event.is_active ? (
             <button className="active-button">Active</button>
           ) : (

@@ -11,45 +11,38 @@ import {
   Tabs,
   Typography,
   Modal,
-  Paper,
+  TextField,
+  CircularProgress,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import Backdrop from "../Backdrop/Backdrop";
 import { useCookies } from "react-cookie";
-import { Grid } from "swiper";
 import axios from "axios";
+import EventModal from "../EventModal";
+import Navbar from "../Navbar";
 
 const Dashboard = () => {
   const [tabs, setTabs] = useState(1);
   const [cookie, setCookie] = useCookies(["authToken"]);
   const [events, setEvents] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [errors, setErrors] = useState({});
   const [showError, setShowError] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [modalEvent, setModalEvent] = useState(null);
-
-  const modalStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    maxWidth: 400,
-    maxHeight: 500,
-    // bgcolor: "background.paper",
-    backgroundColor:
-      "linear-gradient(180deg, #1C1C1C 0%, rgba(18, 18, 18, 0.65) 100%)",
-    boxShadow: 24,
-    p: 2,
-    overflow: "scroll",
-    overflowX: "hidden",
-  };
+  const [loading, setLoading] = useState(false);
+  const [openJoinTeamModal, setOpenJoinTeamModal] = useState({
+    status: false,
+    code: null,
+  });
+  const [joinTeamCode, setJoinTeamCode] = useState(null);
 
   useEffect(() => {
     try {
       if (cookie.authToken) {
         (async () => {
-          const res = await axios.get(
+          const evts = await axios.get(
             "https://api.saturnaliatiet.com/event/all/",
             {
               headers: {
@@ -58,7 +51,18 @@ const Dashboard = () => {
               },
             }
           );
-          setEvents(res.data);
+          setEvents(evts.data);
+          const team = await axios.get(
+            "https://api.saturnaliatiet.com/event/teams-joined/",
+            {
+              headers: {
+                Authorization: "Token " + cookie.authToken,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          setTeams(team.data);
+          console.log(teams);
         })();
       } else {
         setShowError(true);
@@ -84,9 +88,10 @@ const Dashboard = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log(modalEvent);
-  // }, [modalEvent]);
+  async function joinTeam() {
+    setLoading(true);
+    console.log(joinTeamCode);
+  }
 
   return (
     <Box>
@@ -167,6 +172,99 @@ const Dashboard = () => {
             </Container>
           </>
         )}
+        {tabs === 2 && <></>}
+        {tabs === 4 && (
+          <>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexWrap: "wrap",
+                padding: 1,
+                marginTop: 3,
+                marginBottom: 3,
+              }}
+            >
+              {events.map((event) => {
+                if (
+                  event.is_registered &&
+                  event.is_team_event &&
+                  !event.is_member
+                ) {
+                  return (
+                    <>
+                      <Card
+                        sx={{
+                          maxWidth: 300,
+                          marginBottom: 2,
+                          background: "gray",
+                        }}
+                        key={event.id}
+                      >
+                        <CardMedia
+                          component="img"
+                          height="140"
+                          image={event.image}
+                          alt={event.name}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {event.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {event.description.substring(0, 75) + "..."}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button
+                            size="small"
+                            onClick={() => {
+                              setOpenJoinTeamModal({
+                                status: true,
+                                code: event.id,
+                              });
+                            }}
+                          >
+                            Join Team
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </>
+                  );
+                }
+              })}
+            </Container>
+            <Modal
+              open={openJoinTeamModal.status}
+              closeModal={() =>
+                setOpenJoinTeamModal({ status: false, code: null })
+              }
+            >
+              <Container>
+                <Typography align="center" variant="h5">
+                  Enter Team Code
+                </Typography>
+                <TextField
+                  type="text"
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                  onChange={(e) => {
+                    setJoinTeamCode(e.target.value);
+                  }}
+                />
+                <Button
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                  onClick={joinTeam}
+                >
+                  {loading ? <CircularProgress color="inherit" /> : "Join Team"}
+                </Button>
+              </Container>
+            </Modal>
+          </>
+        )}
       </Container>
       {showError && (
         <Snackbar open={showError}>
@@ -174,53 +272,13 @@ const Dashboard = () => {
         </Snackbar>
       )}
       {modalEvent && (
-        <Modal open={openModal} onClose={() => setOpenModal(false)}>
-          <Paper sx={modalStyle}>
-            <img
-              src={modalEvent?.image}
-              alt={modalEvent?.name}
-              style={{ maxWidth: "100%", textAlign: "center" }}
-            />
-            <Typography variant="h4" sx={{ mt: 2, mb: 2 }}>
-              {modalEvent?.name}
-            </Typography>
-            <Typography variant="body1" textAlign="justify">
-              {modalEvent?.description}
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 2 }}>
-              Date: {modalEvent?.date}
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 2 }}>
-              Time: {modalEvent?.time}
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 2 }}>
-              Venue: {modalEvent?.venue}
-            </Typography>
-            {modalEvent?.is_team_event && (
-              <>
-                <Typography variant="body2" sx={{ mt: 2 }}>
-                  Max Team Size: {modalEvent?.max_team_size}
-                </Typography>
-                <Typography variant="body2" sx={{ mt: 2 }}>
-                  Min Team Size: {modalEvent?.min_team_size}
-                </Typography>
-              </>
-            )}
-            {modalEvent?.rules && (
-              <>
-                <Typography variant="body2" sx={{ mt: 2 }}>
-                  Rules:{" "}
-                  <ul>
-                    {modalEvent?.rules.map((rule) => {
-                      return <li>{rule}</li>;
-                    })}
-                  </ul>
-                </Typography>
-              </>
-            )}
-          </Paper>
-        </Modal>
+        <EventModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          modalEvent={modalEvent}
+        />
       )}
+      <Navbar />
     </Box>
   );
 };
