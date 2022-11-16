@@ -1,17 +1,37 @@
 .container{
     width: 100vw;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .eventHeading{
     font-family: 'BatmanForeverOutline', sans-serif;
     font-family: 'BatmanForeverAlternate', sans-serif;
-    font-size: 4rem;
+    font-size: 2.9rem;
     text-align: center;
     user-select: none;
-    padding: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.eventBox{
+    width: 45rem;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.257);
+    margin-bottom: 1rem;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    border-radius: 25px;
 }
 
 .groundmesh{
@@ -29,8 +49,10 @@
 }
 
 .active{
-    background-color: rgba(255, 255, 255, 0.181);
+    background-color: black; 
     padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 3rem;
     border-radius: 10px;
     color: #fff;
     z-index: 10000;
@@ -41,6 +63,7 @@
 .inactive{
     background-color: rgba(0, 0, 0, 0.121);
     padding: 0.5rem;
+    margin: 0.5rem;
     border-radius: 10px;
     color: #fff;
     z-index: 10;
