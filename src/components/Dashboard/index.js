@@ -10,9 +10,6 @@ import {
   Tab,
   Tabs,
   Typography,
-  Modal,
-  TextField,
-  CircularProgress,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useState, useEffect } from "react";
@@ -22,9 +19,6 @@ import axios from "axios";
 import EventModal from "../EventModal";
 import Navbar from "../Navbar";
 import logo from "../../assets/bhoot.svg";
-import zIndex from "@mui/material/styles/zIndex";
-import { setLocale } from "yup";
-import { Groups } from "@mui/icons-material";
 
 const Dashboard = () => {
   const [tabs, setTabs] = useState(1);

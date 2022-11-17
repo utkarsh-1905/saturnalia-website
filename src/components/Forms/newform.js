@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   Box,
@@ -15,13 +15,13 @@ import {
   Tab,
   Tabs,
   CircularProgress,
+  Paper,
 } from "@mui/material";
 import modalStyles from "./modal.module.scss";
 import * as yup from "yup";
 
 import axios from "axios";
 
-import SittingMan from "./sittingBhoot.svg";
 import { Container } from "@mui/system";
 
 import { useCookies } from "react-cookie";
@@ -38,7 +38,10 @@ const NewForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [tabs, setTabs] = useState(1);
   const [loginData, setLoginData] = useState({});
-
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [fpStep, setFpStep] = useState(1);
+  const [fpData, setFpData] = useState({});
+  const [fpInfo, setFpInfo] = useState({});
   const [cookie, setCookie] = useCookies(["authToken"]);
 
   const uploadImage = async () => {
@@ -216,14 +219,14 @@ const NewForm = (props) => {
           })
           .catch((e) => {
             setLoading(false);
-            if (e.response.status == 400) {
+            if (e.response.status === 400) {
               setErrors((prev) => e.response.data["error"]);
               setFormValidError(true);
               setTimeout(() => {
                 setFormValidError(false);
                 setErrors("");
               }, 5000);
-            } else if (e.response.status == 401) {
+            } else if (e.response.status === 401) {
               setErrors((prev) => "Account not verified");
               setFormValidError(true);
               setTimeout(() => {
@@ -252,12 +255,124 @@ const NewForm = (props) => {
       });
   }
 
+  async function sendOTP() {
+    try {
+      if (fpData.email) {
+        const res = await axios.post(
+          "https://api.saturnaliatiet.com/auth/reset-request/",
+          {
+            email: fpData.email,
+          }
+        );
+        if (res.status === 200) {
+          setFpStep(2);
+          setFpInfo({
+            info: true,
+            message: "OTP sent to your email",
+            type: "success",
+          });
+          setTimeout(() => {
+            setFpInfo({
+              info: false,
+              type: "",
+              message: "",
+            });
+          }, 3000);
+        }
+      } else {
+        setFpInfo({
+          type: "error",
+          message: "Email is required",
+          info: true,
+        });
+        setTimeout(() => {
+          setFpInfo({
+            info: false,
+            type: "",
+            message: "",
+          });
+        }, 3000);
+      }
+    } catch (e) {
+      setFpInfo({
+        type: "error",
+        message: e.response.data["error"],
+        info: true,
+      });
+      setTimeout(() => {
+        setFpInfo({
+          info: false,
+          type: "",
+          message: "",
+        });
+      }, 3000);
+    }
+  }
+
+  async function resetPassword() {
+    try {
+      console.log(fpData);
+      if (fpData.otp && fpData.password) {
+        const res = await axios.post(
+          "https://api.saturnaliatiet.com/auth/reset-password/",
+          {
+            email: fpData.email,
+            otp: fpData.otp,
+            password: fpData.password,
+          }
+        );
+        if (res.status === 200) {
+          setFpInfo({
+            type: "success",
+            info: true,
+            message: "Password reset successfully",
+          });
+          setTimeout(() => {
+            setFpInfo({
+              info: false,
+              type: "",
+              message: "",
+            });
+            setForgotPassword(false);
+            setFpStep(1);
+          }, 3000);
+        }
+      } else {
+        setFpInfo({
+          type: "error",
+          message: "OTP and Password are required",
+          info: true,
+        });
+        setTimeout(() => {
+          setFpInfo({
+            info: false,
+            type: "",
+            message: "",
+          });
+        }, 3000);
+      }
+    } catch (e) {
+      setFpInfo({
+        type: "error",
+        message: e.response.data["error"],
+        info: true,
+      });
+      setTimeout(() => {
+        setFpInfo({
+          info: false,
+          type: "",
+          message: "",
+        });
+      }, 3000);
+    }
+  }
+
   const modalStyle = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    maxWidth: 400,
     // bgcolor: "background.paper",
     backgroundColor:
       "linear-gradient(180deg, #1C1C1C 0%, rgba(18, 18, 18, 0.65) 100%)",
@@ -504,7 +619,97 @@ const NewForm = (props) => {
                   {loading ? <CircularProgress color="secondary" /> : "Login"}
                 </Button>
               </form>
+              <Button
+                variant="text"
+                align="right"
+                sx={{ mt: 1 }}
+                color="warning"
+                onClick={() => setForgotPassword(true)}
+              >
+                Forget Password ?
+              </Button>
             </Box>
+          )}
+          {forgotPassword && (
+            <Modal
+              open={forgotPassword}
+              onClose={() => setForgotPassword(false)}
+            >
+              <Paper sx={{ ...modalStyle, maxHeight: 300, maxWidth: 250 }}>
+                <Typography
+                  variant="h6"
+                  sx={{ textAlign: "center", mt: 1, mb: 1 }}
+                >
+                  Forgot Password
+                </Typography>
+                <TextField
+                  type="text"
+                  variant="outlined"
+                  sx={{
+                    width: "100%",
+                    mb: 1,
+                  }}
+                  size="small"
+                  required
+                  label="Email"
+                  onChange={(e) => {
+                    if (fpStep === 1) {
+                      setFpData({
+                        ...fpData,
+                        email: e.target.value,
+                        otp: "",
+                        password: "",
+                      });
+                    } else {
+                      setFpData({ ...fpData, email: e.target.value });
+                    }
+                  }}
+                />
+                {fpStep === 2 && (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      sx={{ width: "100%", mb: 1 }}
+                      size="small"
+                      required
+                      type="number"
+                      label="OTP"
+                      onChange={(e) => {
+                        if (fpStep === 2) {
+                          setFpData({ ...fpData, otp: e.target.value });
+                        }
+                      }}
+                    />
+                    <TextField
+                      variant="outlined"
+                      sx={{ width: "100%", mb: 1 }}
+                      size="small"
+                      required
+                      type="password"
+                      label="New Password"
+                      onChange={(e) => {
+                        if (fpStep === 2) {
+                          setFpData({ ...fpData, password: e.target.value });
+                        }
+                      }}
+                    />
+                  </>
+                )}
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{ mt: 2, width: "100%" }}
+                  onClick={() => {
+                    fpStep === 1 ? sendOTP() : resetPassword();
+                  }}
+                >
+                  {fpStep === 1 ? "Send OTP" : "Reset Password"}
+                </Button>
+                <Snackbar open={fpInfo.info}>
+                  <Alert severity={fpInfo.type}>{fpInfo.message}</Alert>
+                </Snackbar>
+              </Paper>
+            </Modal>
           )}
           <Snackbar open={formValidError}>
             <Alert severity="error">{errors}</Alert>
