@@ -21,6 +21,8 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import EventModal from "../EventModal";
 import Navbar from "../Navbar";
+import logo from '../../assets/bhoot.svg';
+import zIndex from "@mui/material/styles/zIndex";
 
 const Dashboard = () => {
   const [tabs, setTabs] = useState(1);
@@ -99,7 +101,13 @@ const Dashboard = () => {
       <Container>
         <Tabs
           value={tabs}
-          sx={{ marginTop: 3 }}
+          sx={{ 
+            marginTop: 3,
+            ['@media (max-width: 768px)']: {
+              marginTop: 15,
+              zIndex: 1000
+            }
+          }}
           onChange={(e, n) => {
             setTabs(n);
           }}
@@ -107,8 +115,9 @@ const Dashboard = () => {
         >
           <Tab label="My Events" sx={{ color: "white" }} value={1} />
           <Tab label="My Teams" sx={{ color: "white" }} value={2} />
-          <Tab label="Create Team" sx={{ color: "white" }} value={3} />
-          <Tab label="Join Team" sx={{ color: "white" }} value={4} />
+          {/* <Tab label="Create Team" sx={{ color: "white" }} value={3} /> */}
+          {/* <Tab label="Join Team" sx={{ color: "white" }} value={4} /> */}
+          <Tab label="Payment Details" sx={{ color: "white" }} value={5} />
         </Tabs>
         {tabs === 1 && (
           <>
@@ -173,6 +182,109 @@ const Dashboard = () => {
           </>
         )}
         {tabs === 2 && <></>}
+        {tabs == 5 && (
+          <>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h1 style={{ color: "white", letterSpacing: "0.5rem" }}>
+                PAYMENT DETAILS
+              </h1>
+            </Container>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                flexWrap: "nowrap",
+                padding: 3,
+                marginTop: 3,
+                marginBottom: 3,
+                background: "#ffffff11",
+                ['@media (max-width: 768px)']: {
+                  flexDirection: "column",
+                }
+                // width: "65%"
+              }}
+            >
+              <Container
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img 
+                  src={logo}
+                />
+              </Container>
+              <Container
+                sx = {{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    paddingTop: 15,
+                    ['@media (max-width: 768px)']: {
+                      paddingTop: 3,
+                    }
+                  }}
+              >
+                <Container
+                  sx = {{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    color: "white",
+                    fontSize: "1.2rem",
+                    margin: 1,
+                    padding: 1
+                  }}
+                >
+                  <b>Account Number:&nbsp;&nbsp;</b><em>40507372828</em>
+                </Container>
+                <Container
+                  sx = {{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    color: "white",
+                    fontSize: "1.2rem",
+                    margin: 1,
+                    padding: 1
+                  }}
+                >
+                  <b>IFSC Code:&nbsp;&nbsp;</b><em>SBIN0050244</em>
+                </Container>
+                <Container
+                  sx = {{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    color: "white",
+                    fontSize: "1.2rem",
+                    margin: 1,
+                    padding: 1
+                  }}
+                >
+                  <div><b>(50244) - PATIALA, THAPAR INSTITUTE</b></div>
+                  <div style={{textAlign:"left",marginTop:3, marginBottom: 3}}>
+                  THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY
+                  </div>
+                  PUNJAB - 147001
+                </Container>
+              </Container>
+            </Container>
+          </>
+        )} 
         {tabs === 4 && (
           <>
             <Container
