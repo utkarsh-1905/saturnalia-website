@@ -124,6 +124,7 @@ const NewForm = (props) => {
       tempdata.college = "";
       setFormData(tempdata);
       validateForm(tempdata);
+      setLoading(false);
     }
   }
 
@@ -139,6 +140,7 @@ const NewForm = (props) => {
           setErrors((prev) => prev + error.message + " , ");
         });
         setFormValidError(true);
+        setLoading(false);
         setTimeout(() => {
           setFormValidError(false);
           setErrors("");

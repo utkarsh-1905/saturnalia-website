@@ -1,6 +1,5 @@
 import Backdrop from "./components/Backdrop/Backdrop";
 import Landing from "./Pages/Landing";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import Navbar from "./components/Navbar";
 import Events from "./components/Events/Events";
 import Sponsors from "./components/Sponsors/Sponsors";
@@ -37,7 +36,9 @@ function App() {
                 {/* <section id="sponsor">
           <Sponsors />
         </section> */}
-                <section id="contact-us"><ContactUsMain /></section>
+                <section id="contact-us">
+                  <ContactUsMain />
+                </section>
                 <Footer />
               </Backdrop>
               <Navbar />

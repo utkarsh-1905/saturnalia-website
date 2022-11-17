@@ -5,6 +5,7 @@ import NewForm from "../Forms/newform";
 import { useMediaQuery } from "@mui/material";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
+import {HashLink} from 'react-router-hash-link';
 
 export default function Navbar() {
   // const isMobileView = useMediaQuery("max-width: 768px");
@@ -26,12 +27,12 @@ export default function Navbar() {
             <Link className={navStyles.navlink} to="/">
               Home
             </Link>
-            <a className={navStyles.navlink} href="#events">
+            <HashLink className={navStyles.navlink} to="/#events">
               Events
-            </a>
-            <a className={navStyles.navlink} href="#highlights">
+            </HashLink>
+            <HashLink className={navStyles.navlink} to="/#highlights">
               Features
-            </a>
+            </HashLink>
           </div>
           <div className={navStyles.buttonTray}>
             {!cookie?.authToken ? (
@@ -50,15 +51,15 @@ export default function Navbar() {
             )}
           </div>
           <div className={navStyles.navRight}>
-            <a className={navStyles.navlink} href="#sponsor">
+            <HashLink className={navStyles.navlink} to="/#sponsor">
               Sponsors
-            </a>
-            <a className={navStyles.navlink} href="#landing">
+            </HashLink>
+            <HashLink className={navStyles.navlink} to="/#landing">
               FAQS
-            </a>
-            <a className={navStyles.navlink} href="#footer">
+            </HashLink>
+            <HashLink className={navStyles.navlink} to="/#contact-us">
               Contact Us
-            </a>
+            </HashLink>
           </div>
         </div>
       ) : (
@@ -72,24 +73,24 @@ export default function Navbar() {
                 <Link className={navStyles.navlink} to="/dashboard">
                   <em>Explore</em>
                 </Link>
-                <a className={navStyles.navlink} href="">
+                <Link className={navStyles.navlink} to="/">
                   Home
-                </a>
-                <a className={navStyles.navlink} href="">
+                </Link>
+                <HashLink className={navStyles.navlink} to="/#events">
                   Events
-                </a>
-                <a className={navStyles.navlink} href="">
+                </HashLink>
+                <HashLink className={navStyles.navlink} to="/#highlights">
                   Features
-                </a>
-                <a className={navStyles.navlink} href="">
+                </HashLink>
+                <HashLink className={navStyles.navlink} to="/#sponsors">
                   Sponsors
-                </a>
-                <a className={navStyles.navlink} href="">
+                </HashLink>
+                <HashLink className={navStyles.navlink} to="/#landing">
                   FAQS
-                </a>
-                <a className={navStyles.navlink} href="">
+                </HashLink>
+                <HashLink className={navStyles.navlink} to="/#contact-us">
                   Contact Us
-                </a>
+                </HashLink>
               </div>
             </div>
           )}
