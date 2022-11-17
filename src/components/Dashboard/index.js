@@ -21,8 +21,10 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import EventModal from "../EventModal";
 import Navbar from "../Navbar";
-import logo from '../../assets/bhoot.svg';
+import logo from "../../assets/bhoot.svg";
 import zIndex from "@mui/material/styles/zIndex";
+import { setLocale } from "yup";
+import { Groups } from "@mui/icons-material";
 
 const Dashboard = () => {
   const [tabs, setTabs] = useState(1);
@@ -34,11 +36,6 @@ const Dashboard = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalEvent, setModalEvent] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [openJoinTeamModal, setOpenJoinTeamModal] = useState({
-    status: false,
-    code: null,
-  });
-  const [joinTeamCode, setJoinTeamCode] = useState(null);
 
   useEffect(() => {
     try {
@@ -53,7 +50,6 @@ const Dashboard = () => {
               },
             }
           );
-          setEvents(evts.data);
           const team = await axios.get(
             "https://api.saturnaliatiet.com/event/teams-joined/",
             {
@@ -64,7 +60,7 @@ const Dashboard = () => {
             }
           );
           setTeams(team.data);
-          console.log(teams);
+          setEvents(evts.data);
         })();
       } else {
         setShowError(true);
@@ -90,23 +86,18 @@ const Dashboard = () => {
     }
   }, []);
 
-  async function joinTeam() {
-    setLoading(true);
-    console.log(joinTeamCode);
-  }
-
   return (
     <Box>
       <Backdrop />
       <Container>
         <Tabs
           value={tabs}
-          sx={{ 
+          sx={{
             marginTop: 3,
-            ['@media (max-width: 768px)']: {
+            ["@media (max-width: 768px)"]: {
               marginTop: 15,
-              zIndex: 1000
-            }
+              zIndex: 1000,
+            },
           }}
           onChange={(e, n) => {
             setTabs(n);
@@ -181,8 +172,97 @@ const Dashboard = () => {
             </Container>
           </>
         )}
-        {tabs === 2 && <></>}
-        {tabs == 5 && (
+        {tabs === 2 && (
+          <>
+            {teams &&
+              teams.map((team) => {
+                return (
+                  <Container
+                    sx={{
+                      mt: 4,
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <Card
+                      sx={{
+                        maxWidth: 300,
+                        marginBottom: 2,
+                        // background: "gray",
+                      }}
+                      key={team.key}
+                    >
+                      <CardContent>
+                        {team.amount_paid ? (
+                          <Typography
+                            gutterBottom
+                            variant="body2"
+                            align="left"
+                            component="div"
+                          >
+                            <Alert severity="success">
+                              Registered successfully !! (Amount Paid)
+                            </Alert>
+                          </Typography>
+                        ) : (
+                          <Typography
+                            gutterBottom
+                            variant="body2"
+                            align="left"
+                            component="div"
+                          >
+                            <Alert severity="warning">
+                              Registered successfully !! (Amount Pending)
+                            </Alert>
+                          </Typography>
+                        )}
+                        <Typography gutterBottom variant="h5" component="div">
+                          {team.event_name.toUpperCase()}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          sx={{ mb: 2 }}
+                          color="text.secondary"
+                        >
+                          {team.team_name.toUpperCase()}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          align="left"
+                        >
+                          Team Members
+                        </Typography>
+                        <ul>
+                          {team.members.map((member, index) => {
+                            if (index === 0) {
+                              return (
+                                <li style={{ textAlign: "left" }}>
+                                  {member} (Leader)
+                                </li>
+                              );
+                            } else {
+                              return (
+                                <li style={{ textAlign: "left" }}>{member}</li>
+                              );
+                            }
+                          })}
+                        </ul>
+                        <Typography variant="body1" align="center">
+                          Your team code - {team.key}
+                        </Typography>
+                        {/* Implement delete team */}
+                      </CardContent>
+                    </Card>
+                  </Container>
+                );
+              })}
+          </>
+        )}
+        {tabs === 5 && (
           <>
             <Container
               sx={{
@@ -207,9 +287,9 @@ const Dashboard = () => {
                 marginTop: 3,
                 marginBottom: 3,
                 background: "#ffffff11",
-                ['@media (max-width: 768px)']: {
+                ["@media (max-width: 768px)"]: {
                   flexDirection: "column",
-                }
+                },
                 // width: "65%"
               }}
             >
@@ -219,52 +299,59 @@ const Dashboard = () => {
                   flexDirection: "row",
                   justifyContent: "center",
                   alignItems: "center",
+                  maxWidth: 800,
                 }}
               >
-                <img 
+                <img
                   src={logo}
+                  style={{
+                    maxWidth: "60vw",
+                  }}
+                  alt="Payment Details"
                 />
               </Container>
               <Container
-                sx = {{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                    paddingTop: 15,
-                    ['@media (max-width: 768px)']: {
-                      paddingTop: 3,
-                    }
-                  }}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  paddingTop: 15,
+                  ["@media (max-width: 768px)"]: {
+                    paddingTop: 3,
+                  },
+                }}
               >
                 <Container
-                  sx = {{
+                  sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "flex-start",
                     color: "white",
                     fontSize: "1.2rem",
                     margin: 1,
-                    padding: 1
+                    padding: 1,
                   }}
                 >
-                  <b>Account Number:&nbsp;&nbsp;</b><em>40507372828</em>
+                  <b>Account Number:&nbsp;&nbsp;</b>
+                  <em>40507372828</em>
                 </Container>
                 <Container
-                  sx = {{
+                  sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "flex-start",
                     color: "white",
                     fontSize: "1.2rem",
                     margin: 1,
-                    padding: 1
+                    padding: 1,
                   }}
                 >
-                  <b>IFSC Code:&nbsp;&nbsp;</b><em>SBIN0050244</em>
+                  <b>IFSC Code:&nbsp;&nbsp;</b>
+                  <em>SBIN0050244</em>
                 </Container>
                 <Container
-                  sx = {{
+                  sx={{
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",
@@ -272,109 +359,21 @@ const Dashboard = () => {
                     color: "white",
                     fontSize: "1.2rem",
                     margin: 1,
-                    padding: 1
+                    padding: 1,
                   }}
                 >
-                  <div><b>(50244) - PATIALA, THAPAR INSTITUTE</b></div>
-                  <div style={{textAlign:"left",marginTop:3, marginBottom: 3}}>
-                  THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY
+                  <div>
+                    <b>(50244) - PATIALA, THAPAR INSTITUTE</b>
+                  </div>
+                  <div
+                    style={{ textAlign: "left", marginTop: 3, marginBottom: 3 }}
+                  >
+                    THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY
                   </div>
                   PUNJAB - 147001
                 </Container>
               </Container>
             </Container>
-          </>
-        )} 
-        {tabs === 4 && (
-          <>
-            <Container
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                alignItems: "center",
-                flexWrap: "wrap",
-                padding: 1,
-                marginTop: 3,
-                marginBottom: 3,
-              }}
-            >
-              {events.map((event) => {
-                if (
-                  event.is_registered &&
-                  event.is_team_event &&
-                  !event.is_member
-                ) {
-                  return (
-                    <>
-                      <Card
-                        sx={{
-                          maxWidth: 300,
-                          marginBottom: 2,
-                          background: "gray",
-                        }}
-                        key={event.id}
-                      >
-                        <CardMedia
-                          component="img"
-                          height="140"
-                          image={event.image}
-                          alt={event.name}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            {event.name}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {event.description.substring(0, 75) + "..."}
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
-                          <Button
-                            size="small"
-                            onClick={() => {
-                              setOpenJoinTeamModal({
-                                status: true,
-                                code: event.id,
-                              });
-                            }}
-                          >
-                            Join Team
-                          </Button>
-                        </CardActions>
-                      </Card>
-                    </>
-                  );
-                }
-              })}
-            </Container>
-            <Modal
-              open={openJoinTeamModal.status}
-              closeModal={() =>
-                setOpenJoinTeamModal({ status: false, code: null })
-              }
-            >
-              <Container>
-                <Typography align="center" variant="h5">
-                  Enter Team Code
-                </Typography>
-                <TextField
-                  type="text"
-                  variant="outlined"
-                  sx={{ width: "100%" }}
-                  onChange={(e) => {
-                    setJoinTeamCode(e.target.value);
-                  }}
-                />
-                <Button
-                  variant="outlined"
-                  sx={{ width: "100%" }}
-                  onClick={joinTeam}
-                >
-                  {loading ? <CircularProgress color="inherit" /> : "Join Team"}
-                </Button>
-              </Container>
-            </Modal>
           </>
         )}
       </Container>

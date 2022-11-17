@@ -59,7 +59,7 @@ const NewForm = (props) => {
       tempdata.roll_no = "";
       setFormData(tempdata);
       validateForm(tempdata);
-      console.log(formData);
+      // console.log(tempdata, formData);
     }
   };
 
@@ -116,6 +116,7 @@ const NewForm = (props) => {
   async function handleForm() {
     setLoading(true);
     //getRoll if for isThaparian or not
+    // console.log(formData);
     if (!getRoll) {
       await uploadImage();
     } else {
@@ -363,13 +364,14 @@ const NewForm = (props) => {
                     value="thaparian"
                     control={
                       <Radio
-                        onClick={() => setGetRoll(true)}
-                        onChange={(e) =>
+                        onClick={(e) => {
+                          setGetRoll(true);
                           setFormData({
                             ...formData,
                             is_thaparian: e.target.checked,
-                          })
-                        }
+                            college: "",
+                          });
+                        }}
                       />
                     }
                     label="Yes"
@@ -378,14 +380,15 @@ const NewForm = (props) => {
                     value="non-thaparian"
                     control={
                       <Radio
-                        onClick={() => setGetRoll(false)}
-                        checked={!getRoll}
-                        onChange={(e) =>
+                        onClick={(e) => {
+                          setGetRoll(false);
                           setFormData({
                             ...formData,
-                            is_thaparian: e.target.checked,
-                          })
-                        }
+                            is_thaparian: !e.target.checked,
+                            roll_no: "",
+                          });
+                        }}
+                        checked={!getRoll}
                       />
                     }
                     label="No"
