@@ -6,12 +6,15 @@ import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import TeamRegForm from "../Forms/TeamRegForm";
 
 const EventCard = ({ event }) => {
   const [cookie, setCookie] = useCookies(["authToken"]);
-
+  const [teamModal, showTeamModal] = React.useState(false);
   console.log(event);
-
+  const registerTeam = () => {
+    showTeamModal(true);
+  }
   const register = () => {
     console.log(cookie.authToken);
 
@@ -81,13 +84,21 @@ const EventCard = ({ event }) => {
           </div>
           <div className="event-card-button-div">
             {event.registration_allowed && (
-              <button className="card-event-register" onClick={register}>
-                Register Now
-              </button>
+              event.is_team_event?
+                (<button className="card-event-register" onClick={register}>
+                  Register Now
+                </button>)
+                :
+                (
+                  <button className="card-event-register" onClick={registerTeam}>
+                    Register/Join Team
+                  </button>
+                )
             )}
           </div>
         </div>
       </div>
+      <TeamRegForm open={teamModal} close={showTeamModal} event={event}/>
     </div>
   );
 };

@@ -13,8 +13,12 @@ const Events = () => {
   const sm = useMediaQuery("max-width:576px");
   const [events, setEvents] = useState(null);
   const [ev, setEv] = useState(true);
+  const [x, setX] = useState(3);
 
   useEffect(() => {
+    if(window.innerWidth < 768){
+      setX(1)
+    }
     const headers = {
       "Content-Type": "application/json",
     };
@@ -22,6 +26,7 @@ const Events = () => {
       .get("https://api.saturnaliatiet.com/event/all/", headers)
       .then((res) => {
         setEvents(res.data);
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -52,23 +57,18 @@ const Events = () => {
       <div className={styles.swiperContainer}>
         <Swiper
           spaceBetween={40}
-          slidesPerView={() => {
-            if (sm) {
-              return 1;
-            } else if (md) {
-              return 2;
-            } else return 3;
-          }}
+          slidesPerView={x}
           modules={[Autoplay, Keyboard, Navigation, Scrollbar, Pagination]}
           navigation
+          // pagination={{clickable: true}}
           scrollbar={{ draggable: true }}
-          pagination={true}
-          autoplay={{ delay: 2500 }}
+          autoplay={{ delay: 2000 }}
           keyboard
         >
           {events &&
             events.map((event) => {
               if (ev && event.type == "EV") {
+                console.log("EV", event)
                 return (
                   <SwiperSlide>
                     <EventCard event={event} />
@@ -83,6 +83,7 @@ const Events = () => {
               }
             })}
         </Swiper>
+        
       </div>
     </div>
   );
