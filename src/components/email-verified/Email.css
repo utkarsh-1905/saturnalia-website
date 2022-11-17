@@ -1,44 +1,41 @@
-.email-main{
-    width: 100vw;
-    height: 100vh;
-    /* background-color: black; */
-    /* border-style: solid; */
-    font-family: 'BatmanForeverOutline', sans-serif;
-    font-family: 'BatmanForeverAlternate', sans-serif;
-    overflow: hidden;
-   
+.email-main {
+  width: 100vw;
+  height: fit-content;
+  font-family: "BatmanForeverOutline", sans-serif;
+  font-family: "BatmanForeverAlternate", sans-serif;
+  overflow: hidden;
 }
 
-.sat-logo{
-    height: 200px;
-    margin-top: 170px;
+.sat-logo {
+  height: 200px;
+  margin-top: 2rem;
 }
 
-.email-text{
-    margin-top: 130px;
-    font-size: 35px;
-    color: white;
-    margin-left: 30px;
-    margin-right: 30px;
-    text-shadow: 2px 2px 3px black;
+.email-text {
+  margin-top: 130px;
+  font-size: 35px;
+  color: white;
+  margin-left: 30px;
+  margin-right: 30px;
+  text-shadow: 2px 2px 3px black;
 }
 
-.home-button{
-    width: 200px;
-    height: 50px;
-    font-size: 20px;
-    font-family: 'BatmanForeverOutline', sans-serif;
-    font-family: 'BatmanForeverAlternate', sans-serif;
-    font-weight:600;
+.home-button {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  font-family: "BatmanForeverOutline", sans-serif;
+  font-family: "BatmanForeverAlternate", sans-serif;
+  font-weight: 600;
 }
 
 /*Custom CSS Register Button */
-.home-button{
-    height: 60px;
-    width: 250px;
-    margin-top: 40px;
-    --background-color: white;
-  --border-color: linear-gradient(180deg, #39008C 0%, #00FFFF 100%);
+.home-button {
+  height: 60px;
+  width: 250px;
+  margin-top: 40px;
+  --background-color: white;
+  --border-color: linear-gradient(180deg, #39008c 0%, #00ffff 100%);
   --border-width: 0.25em;
   --edge-size: 0.5em;
 
@@ -63,85 +60,73 @@
 }
 
 .home-button::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--border-color);
-    z-index: -2;
-  }
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--border-color);
+  z-index: -2;
+}
 
 .home-button::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--background-color);
-    z-index: -1;
-    clip-path: polygon(
-     
-      var(--border-width) calc(var(--edge-size) + var(--border-width) * 0.5),
-     
-      calc(var(--edge-size) + var(--border-width) * 0.5) var(--border-width),
-     
-      calc(100% - var(--border-width)) var(--border-width),
-      
-      calc(100% - var(--border-width))
-        calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5)),
-      
-      calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width)),
-      
-      calc(var(--border-width)) calc(100% - var(--border-width))
-    );
-    transition: clip-path 500ms;
-  }
-
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--background-color);
+  z-index: -1;
+  clip-path: polygon(
+    var(--border-width) calc(var(--edge-size) + var(--border-width) * 0.5),
+    calc(var(--edge-size) + var(--border-width) * 0.5) var(--border-width),
+    calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5)),
+    calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width)),
+    calc(var(--border-width)) calc(100% - var(--border-width))
+  );
+  transition: clip-path 500ms;
+}
 
 .home-button:hover {
-    color: white;
-  }
-
+  color: white;
+}
 
 .home-button:hover::after {
-  
-    clip-path: polygon(
+  clip-path: polygon(
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5)),
+    calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5)),
+    calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width)),
+    calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5))
       calc(100% - var(--border-width))
-        calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5)),
-      calc(100% - var(--border-width)) var(--border-width),
-      calc(100% - var(--border-width)) var(--border-width),
-      calc(100% - var(--border-width))
-        calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5)),
-      calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width)),
-      calc(100% - calc(var(--edge-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width))
-    );
+  );
+}
+
+@media screen and (max-width: 1000px) {
+  .sat-logo {
+    height: 140px;
+    margin-top: 200px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sat-logo {
+    height: 80px;
+    margin-top: 100px;
+  }
+  .email-text {
+    font-size: 25px;
+    margin-top: 70px;
   }
 
-
-
-@media screen and (max-width:1000px) {
-    .sat-logo{
-        height: 140px;
-        margin-top: 200px;
-    }
+  .home-button {
+    font-size: 17px;
+    width: 150px;
+    height: 50px;
+  }
 }
-
-@media screen and (max-width:600px) {
-    .sat-logo{
-        height: 80px;
-        margin-top: 100px;
-    }
-    .email-text{
-        font-size: 25px;
-        margin-top: 70px;
-    }
-
-    .home-button{
-        font-size: 17px;
-        width: 150px;
-        height: 50px;
-    }
-}
-
 
 @import url("http://fonts.cdnfonts.com/css/batman-forever");
