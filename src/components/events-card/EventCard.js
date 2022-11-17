@@ -84,7 +84,7 @@ const EventCard = ({ event }) => {
           </div>
           <div className="event-card-button-div">
             {event.registration_allowed && (
-              event.is_team_event?
+              !event.is_team_event?
                 (<button className="card-event-register" onClick={register}>
                   Register Now
                 </button>)

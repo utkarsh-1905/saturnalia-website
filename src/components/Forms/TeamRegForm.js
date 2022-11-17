@@ -17,16 +17,75 @@ import {
   } from "@mui/material";
   import modalStyles from "./modal.module.scss";
   import * as yup from "yup";
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 function TeamRegForm({open, close, event}) {
   const [teamData, setTeamData] = useState({});
+  const [cookie, setCookie] = useCookies(["authToken"]);
   const [joinTeamData, setJoinTeamData] = useState({});
   const [tabs, setTabs] = useState(1);
+  const [showTeamCode ,setShowTeamCode] = useState(false);
+  const [teamCode, setTeamCode] = useState("");
+  const [showJoinTeamSuccess ,setShowJoinTeamSuccess] = useState(false);
   const createTeam = () => {
     console.log(teamData);
+    if (cookie.authToken) {
+        console.log(event.id);
+        teamData["event"] = event.id
+        teamData["members_count"] = parseInt(teamData["members_count"]);
+        console.log("DATAAA", teamData)
+        var config = {
+          method: "post",
+          url: "https://api.saturnaliatiet.com/event/create-team/",
+          headers: {
+            Authorization: "Token " + cookie.authToken,
+            "Content-Type": "application/json",
+          },
+          data: teamData,
+        };
+        axios(config)
+          .then(function (response) {
+            console.log(response)
+            console.log(response.data);
+            setTeamCode(response.data["key"])
+            setShowTeamCode(true);
+          })
+          .catch(function (error) {
+            console.log(error)
+            alert(error.response.data["error"]);
+          });
+      } else {
+        alert("You need to login first to register for this event!");
+      }
   }
   const joinTeam = () => {
     console.log(joinTeamData);
+    if (cookie.authToken) {
+        console.log(event.id);
+        joinTeamData["event"] = event.id
+        console.log("DATAAA", joinTeamData);
+        var config = {
+          method: "post",
+          url: "https://api.saturnaliatiet.com/event/join-team/",
+          headers: {
+            Authorization: "Token " + cookie.authToken,
+            "Content-Type": "application/json",
+          },
+          data: joinTeamData,
+        };
+        axios(config)
+          .then(function (response) {
+            console.log(response)
+            setShowJoinTeamSuccess(true);
+          })
+          .catch(function (error) {
+            console.log(error)
+            alert(error.response.data["error"]);
+          });
+      } else {
+        alert("You need to login first to register for this event!");
+      }
   }
   const modalStyle = {
     position: "absolute",
@@ -90,7 +149,7 @@ function TeamRegForm({open, close, event}) {
                             <TextField
                                 variant="outlined"
                                 label={event.min_team_size ? "Team Size: " + event.min_team_size + " - " + event.max_team_size : "Team Size"}
-                                type="password"
+                                type="number"
                                 required
                                 sx={{
                                 width: "100%",
@@ -140,6 +199,21 @@ function TeamRegForm({open, close, event}) {
                         </form>
                     </Box>
                 )} 
+                <Snackbar open={showTeamCode}>
+                    <Alert severity="success">
+                        Your Team Code: {teamCode}
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={showTeamCode}>
+                    <Alert severity="success">
+                        Please check your mail for further details.
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={showJoinTeamSuccess}>
+                    <Alert severity="success">
+                        You have successfully joined the team! Please check your mail for further details.
+                    </Alert>
+                </Snackbar>
             </Box>
         </Modal>
         </div>
