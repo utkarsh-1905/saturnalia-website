@@ -12,6 +12,7 @@ const NonThapar = () => {
     const [phnNumber,setPhnNumber]=useState(0);
     const [query,setQuery]=useState('');
     const [buttonMsg,setButtonMsg]=useState();
+    const [buttonDisable,setButtonDisable]=useState(false);
 
 
     const defaultValues={
@@ -26,7 +27,7 @@ const NonThapar = () => {
         const data=await response.data;
         // console.log(data.status);
         setButtonMsg(data.status);
-       
+        setButtonDisable(true);
 
     }
 
@@ -72,7 +73,7 @@ const NonThapar = () => {
 
         <textarea onChange={(e)=>{setQuery(e.target.value)}} className='query-box' onChange={(e)=>{setQuery(e.target.value)}}  type="text" placeholder='Enter your query' cols="30" rows="8"></textarea>
         <br/>
-        <button className='register-button-submit' type="submit">{buttonMsg ? <>Query Sent</>:<>Submit</>}</button>
+        <button disabled={buttonDisable} className='register-button-submit' type="submit">{ buttonMsg === 'success' ? <>Query Sent</>:<>Submit</>}</button>
         <br/>
         </Form>
        </Formik>
