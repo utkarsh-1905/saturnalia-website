@@ -109,6 +109,7 @@
 .navToggleButton {
   position: fixed;
   top: 0;
+  margin-bottom: 4rem;
   left: auto;
   right: auto;
   padding: 1rem;
@@ -127,8 +128,8 @@
   }
   .navbar {
     width: 100%;
-    margin-top: 10rem;
-    height: fit-content;
+    margin-top: 30rem;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
