@@ -110,6 +110,7 @@
     .split-image-container .split-image:nth-child(1){
         width: 30%;
         scale: 0.7;
+        height:450px;
         /* border-style: solid; */
         background-position: -10px;
         /* border-radius: 10px; */
@@ -119,6 +120,7 @@
         width: 30%;
         /* border-style: solid; */
         scale: 0.7;
+        height:450px;
         background-position: -260px;
         transform: scale(1.1);
         /* border-radius: 10px; */
@@ -129,6 +131,7 @@
     .split-image-container .split-image:nth-child(3){
         width: 30%;
         scale: 0.7;
+        height:450px;
         /* border-style: solid; */
         /* background-position: -640px; */
         background-position: -500px;
