@@ -30,9 +30,12 @@ export default function Navbar() {
             <HashLink className={navStyles.navlink} to="/#events">
               Events
             </HashLink>
-            <HashLink className={navStyles.navlink} to="/#highlights">
+            <a className={navStyles.navlink} href="https://hack.saturnaliatiet.com/" target="_blank">
+              Hackathon 
+            </a>
+            {/* <HashLink className={navStyles.navlink} to="/#highlights">
               Features
-            </HashLink>
+            </HashLink> */}
           </div>
           <div className={navStyles.buttonTray}>
             {!cookie?.authToken ? (
@@ -70,25 +73,28 @@ export default function Navbar() {
           {isOpen && (
             <div className={navStyles.navbar}>
               <div className={navStyles.navLeft}>
-                <Link className={navStyles.navlink} to="/dashboard">
+                <Link className={navStyles.navlink} to="/dashboard" onClick={()=>setIsOpen(false)}>
                   <em>Explore</em>
                 </Link>
-                <Link className={navStyles.navlink} to="/">
+                <Link className={navStyles.navlink} to="/" onClick={()=>setIsOpen(false)}>
                   Home
                 </Link>
-                <HashLink className={navStyles.navlink} to="/#events">
+                <HashLink className={navStyles.navlink} to="/#events" onClick={()=>setIsOpen(false)}>
                   Events
                 </HashLink>
-                <HashLink className={navStyles.navlink} to="/#highlights">
+                <a className={navStyles.navlink} href="https://hack.saturnaliatiet.com/" target="_blank" onClick={()=>setIsOpen(false)}>
+                  Hackathon
+                </a>
+                {/* <HashLink className={navStyles.navlink} to="/#highlights">
                   Features
-                </HashLink>
-                <HashLink className={navStyles.navlink} to="/#sponsors">
+                </HashLink> */}
+                <HashLink className={navStyles.navlink} to="/#sponsors" onClick={()=>setIsOpen(false)}>
                   Sponsors
                 </HashLink>
-                <HashLink className={navStyles.navlink} to="/#landing">
+                <HashLink className={navStyles.navlink} to="/#landing" onClick={()=>setIsOpen(false)}>
                   FAQS
                 </HashLink>
-                <HashLink className={navStyles.navlink} to="/#contact-us">
+                <HashLink className={navStyles.navlink} to="/#contact-us" onClick={()=>setIsOpen(false)}>
                   Contact Us
                 </HashLink>
               </div>

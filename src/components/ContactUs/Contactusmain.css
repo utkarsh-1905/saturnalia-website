@@ -34,7 +34,10 @@ margin-top: 50px;
     margin-left: 7vw;
 }
 
-
+.eventHeading{
+    font-family: 'BatmanForeverOutline', sans-serif;
+    font-family: 'BatmanForeverAlternate', sans-serif;
+}
 
 @media screen and (max-width:1850px) {
     .bhoot-svg{
