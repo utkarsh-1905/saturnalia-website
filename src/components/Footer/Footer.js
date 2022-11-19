@@ -20,10 +20,10 @@ const Footer = () => {
           vulputate libero et velit interdum, ac aliquet odio mattis.
         </p> */}
         <div className={styles.logos}>
-          <img src={Facebook} alt="Facebook" />
-          <img src={Instagram} alt="Instagram" />
-          <img src={Twitter} alt="Twitter" />
-          <img src={Youtube} alt="Youtube" />
+          <a href="https://www.facebook.com/saturnalia.thapar/?ti=as"><img className="footer-img" src={Facebook} alt="Facebook" /></a>
+          <a href="https://instagram.com/saturnalia.thapar?igshid=YmMyMTA2M2Y=" ><img src={Instagram} alt="Instagram" /></a>
+          <a><img src={Twitter} alt="Twitter" /></a>
+          <a href="https://youtube.com/channel/UCZv84Q5t_ESkpSnNlt5H0lg"><img src={Youtube} alt="Youtube" /></a>
         </div>
       </div>
       <div className={styles.right}>

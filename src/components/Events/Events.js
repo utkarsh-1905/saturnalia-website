@@ -7,6 +7,7 @@ import "swiper/css/autoplay";
 import EventCard from "../../components/events-card/EventCard";
 import axios from "axios";
 import { useMediaQuery } from "@mui/material";
+// import HardCodedData from './Hardcoded'
 
 const Events = () => {
   const md = useMediaQuery("max-width:768px");
@@ -14,6 +15,9 @@ const Events = () => {
   const [events, setEvents] = useState(null);
   const [ev, setEv] = useState(true);
   const [x, setX] = useState(3);
+
+  //Hard-coded Competition Card :
+  // const [hard,SetHard]=useState(HardCodedData);
 
   useEffect(() => {
     if(window.innerWidth < 768){
@@ -65,6 +69,7 @@ const Events = () => {
           autoplay={{ delay: 2000 }}
           keyboard
         >
+          {/* <EventCard event={HardCodedData} /> */}
           {events &&
             events.map((event) => {
               if (ev && event.type == "EV") {
@@ -76,9 +81,11 @@ const Events = () => {
                 );
               } else if (!ev && event.type == "CP") {
                 return (
+                  <>
                   <SwiperSlide>
                     <EventCard event={event} />
                   </SwiperSlide>
+                  </>
                 );
               }
             })}

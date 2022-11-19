@@ -20,6 +20,17 @@ code {
     monospace;
 }
 
-.App {
+/* .App {
   scrollbar-color: rgb(48, 192, 227) black;
+} */
+
+
+/*Custom Scrollbar */
+::-webkit-scrollbar{
+  width: 10px;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(rgb(41, 41, 167),rgb(48, 192, 227));
 }
