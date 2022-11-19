@@ -1,0 +1,28 @@
+const Hard=  {
+    category: "CL",
+date: null,
+deadline: null,
+description: "Register for One of the Biggest and Best Hackathon , Saturnalia 22",
+domain: "DC",
+fees: "Free",
+id: 23,
+image: "https://res.cloudinary.com/dv7jje0bw/image/upload/v1668775677/pxixacmtcocexpp9kmlj.webp",
+intra_thapar: false,
+is_active: true,
+is_leader: false,
+is_member: false,
+is_registered: false,
+is_team_event: true,
+// max_team_size: 2,
+// min_team_size: 1,
+name: "Smart Punjab Hackathon",
+// prize1: "Worth upto ₹8,000",
+// prize2: "Worth upto ₹4,000",
+registration_allowed: true,
+// rules: (8) ['Participants can either perform solo or in a duet.…hange throughout the competition in case of duet.', 'The participants should bring their own audio trac… to the organizing team prior to the performance.', 'Time limit of the performance is 3 to 5 minutes. Exceeding the time  limit will lead to penalties.', 'Props are allowed as per the requirement of the pa…o the stage of the auditorium will not be allowed', 'Dance floor area must be in the same condition after the  performance as before.', 'Vulgarity of any kind with respect to dance moves, costumes, etc will lead to disqualification.', 'Participants must agree that the decisions of all the judges are fair and final.', 'Judging Criteria :- Choreography Dance steps/Utili…e style;  XFactor in dance: Over all presentation'],
+time: null,
+type: "CP",
+venue: null,
+  };
+
+export default Hard;
