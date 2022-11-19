@@ -8,6 +8,7 @@
     background: linear-gradient(90.65deg, #161616 0.57%, #111111 114.37%);
     width: 100%;
     backdrop-filter: blur(15px);
+    z-index: 20;
 
     .left{
         display: flex;
