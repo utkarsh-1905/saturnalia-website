@@ -58,6 +58,7 @@
 
 
 .register-button-submit:hover{
+    transition: all 4s ease;
     cursor: pointer;
     box-shadow: 0px 0px 3px aqua;
     --background-color: linear-gradient(90deg, #00FFFF 0%,  #39008C 100%);
