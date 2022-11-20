@@ -11,9 +11,9 @@ const Highlights = () => {
   //     img1:"./highlights/back.jpeg"
   //   }
   // ]
-  useEffect(()=>{
-  console.log(window.innerWidth,window.innerHeight);
-  },[])
+  // useEffect(()=>{
+  // console.log(window.innerWidth,window.innerHeight);
+  // },[])
 
   return (
     <div className='container'>    

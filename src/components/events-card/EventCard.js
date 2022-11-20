@@ -12,6 +12,11 @@ const EventCard = ({ event }) => {
   const [cookie, setCookie] = useCookies(["authToken"]);
   const [teamModal, showTeamModal] = React.useState(false);
   console.log(event);
+
+  const gotoDevFolio=()=>{
+    window.location.href="https://smart-punjab-hackathon-tiet.devfolio.co/";
+  }
+
   const registerTeam = () => {
     showTeamModal(true);
   }
@@ -85,14 +90,25 @@ const EventCard = ({ event }) => {
           <div className="event-card-button-div">
             {event.registration_allowed && (
               !event.is_team_event?
-                (<button className="card-event-register" onClick={register}>
+                ( event.name === 'Smart Punjab Hackathon' ?
+                (<button className="card-event-register" onClick={()=>{gotoDevFolio()}}>
                   Register Now
-                </button>)
+                </button>) 
                 :
-                (
+                (<button className="card-event-register" onClick={register}>
+                Register Now
+              </button>)
+
+                )
+                :
+                ( event.name === 'Smart Punjab Hackathon' ? 
+                (<button className="card-event-register" onClick={()=>{gotoDevFolio()}}>
+                Register/Join Team
+              </button>):(
                   <button className="card-event-register" onClick={registerTeam}>
                     Register/Join Team
                   </button>
+                )
                 )
             )}
           </div>

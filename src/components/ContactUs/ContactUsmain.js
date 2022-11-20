@@ -7,10 +7,10 @@ import Bhoot from '../../assets/bhoot.png'
 const ContactUsmain = () => {
   const [width,setWidth]=useState();
 
-  useEffect(()=>{
-    console.log(window.innerWidth);
-    setWidth(window.innerWidth);
-  },[window.innerWidth])
+  // useEffect(()=>{
+  //   console.log(window.innerWidth);
+  //   setWidth(window.innerWidth);
+  // },[window.innerWidth])
 
   return (
     <div className='container-contact'>

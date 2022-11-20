@@ -14,6 +14,7 @@ const Events = () => {
   const sm = useMediaQuery("max-width:576px");
   const [events, setEvents] = useState(null);
   const [ev, setEv] = useState(true);
+  const [comps,setComps]=useState(true);
   const [x, setX] = useState(3);
 
   //Hard-coded Competition Card :
@@ -43,7 +44,7 @@ const Events = () => {
         <div className={styles.eventBox}>
           <span
             onClick={() => {
-              setEv(true);
+              setEv(true)
             }}
             className={ev ? styles.active : styles.inactive}
           >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./footer.module.scss";
 import Logo from "../../assets/saturnalia-logo.png";
 import Facebook from "../../assets/facebook.svg";
@@ -11,6 +11,18 @@ import CallIcon from "@mui/icons-material/Call";
 // import { motion } from "framer-motion";
 
 const Footer = () => {
+  const [iconsHeight,setIconsHeight]=useState();
+  const [iconsWidth,setIconsWidth]=useState();
+
+  useEffect(()=>{
+    if(window.innerWidth<500){
+      setIconsHeight('30px');
+      setIconsWidth('30px');
+    }
+  },[])
+  
+
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -20,14 +32,14 @@ const Footer = () => {
           vulputate libero et velit interdum, ac aliquet odio mattis.
         </p> */}
         <div className={styles.logos}>
-          <a href="https://www.facebook.com/saturnalia.thapar/?ti=as"><img className="footer-img" src={Facebook} alt="Facebook" /></a>
-          <a href="https://instagram.com/saturnalia.thapar?igshid=YmMyMTA2M2Y=" ><img src={Instagram} alt="Instagram" /></a>
-          <a><img src={Twitter} alt="Twitter" /></a>
-          <a href="https://youtube.com/channel/UCZv84Q5t_ESkpSnNlt5H0lg"><img src={Youtube} alt="Youtube" /></a>
+          <a href="https://www.facebook.com/saturnalia.thapar/?ti=as"><img style={{width:iconsWidth,height:iconsHeight}} className="footer-img" src={Facebook} alt="Facebook" /></a>
+          <a href="https://instagram.com/saturnalia.thapar?igshid=YmMyMTA2M2Y=" ><img style={{width:iconsWidth,height:iconsHeight}} className="footer-img" src={Instagram} alt="Instagram" /></a>
+          <a><img style={{width:iconsWidth,height:iconsHeight}} className="footer-img" src={Twitter} alt="Twitter" /></a>
+          <a href="https://youtube.com/channel/UCZv84Q5t_ESkpSnNlt5H0lg"><img style={{width:iconsWidth,height:iconsHeight}} className="footer-img" src={Youtube} alt="Youtube" /></a>
         </div>
       </div>
       <div className={styles.right}>
-        <h4>Contact Us</h4>
+        <h4>Get in Touch</h4>
         <p>Have Queries? Reach out to us anytime! </p>
         <div>
           <p>
