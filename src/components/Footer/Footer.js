@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <h4>Contact Us</h4>
+        <h4>Get in Touch</h4>
         <p>Have Queries? Reach out to us anytime! </p>
         <div>
           <p>
