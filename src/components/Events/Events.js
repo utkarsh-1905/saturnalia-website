@@ -13,7 +13,7 @@ const Events = () => {
   const md = useMediaQuery("max-width:768px");
   const sm = useMediaQuery("max-width:576px");
   const [events, setEvents] = useState(null);
-  const [ev, setEv] = useState(false);
+  const [ev, setEv] = useState(true);
   const [comps,setComps]=useState(true);
   const [x, setX] = useState(3);
 
@@ -44,14 +44,14 @@ const Events = () => {
         <div className={styles.eventBox}>
           <span
             onClick={() => {
-              setEv(true) && setComps(false)
+              setEv(true)
             }}
             className={ev ? styles.active : styles.inactive}
           >
             EVENTS
           </span>{" "}
           <span
-            onClick={() => setEv(false) && setComps(true) }
+            onClick={() => setEv(false)}
             className={!ev ? styles.active : styles.inactive}
           >
             COMPETITONS
@@ -80,7 +80,7 @@ const Events = () => {
                     <EventCard event={event} />
                   </SwiperSlide>
                 );
-              } else if (comps && event.type == "CP") {
+              } else if (!ev && event.type == "CP") {
                 return (
                   <>
                   <SwiperSlide>
