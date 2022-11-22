@@ -1,14 +1,14 @@
 .container{
     width: 100vw;
-    height: 120vh;
-    display: flex;
+    height: 100vh;
+    /* display: flex; */
     flex-direction: column;
     /* margin-left: 15px;
     margin-right: 15px; */
     font-family: 'BatmanForeverOutline', sans-serif;
     font-family: 'BatmanForeverAlternate', sans-serif;
     margin-top: 20px;
-    padding-bottom: 10%;
+    padding: 2% 0;
 }
 .highlights-container{
     padding: 5%;
@@ -114,14 +114,19 @@
         margin-left: 120px;
         margin-right: 120px;
     }
+    .highlight-content-artists{
+        font-size:1.2rem;
+        color:rgb(224, 224, 224);
+        text-shadow: 2px 2px 3px black;
+    }
 }
 
-.artists{
+/* .artists{
     width: 100vw;
 }
 .zaeden{
     width: 500px;
-}
+} */
 
 @media screen and (max-width:800px) {
     .container{
@@ -130,7 +135,13 @@
         justify-content: center;
         text-align: center;
     }
-
+    .highlights-container{
+        height: 100%;
+        /* padding: 1%; */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
     .left-highlight{
         display: flex;
         justify-content: center;
