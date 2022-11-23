@@ -7,11 +7,13 @@ import NewForm from "../../components/Forms/newform";
 import { useMediaQuery } from "@mui/material";
 import {Fab} from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useCookies } from "react-cookie";
 
 export default function Landing() {
   const [isMobileView, setIsMobileView] = useState(false);
   // const isMobileView = useMediaQuery("max-width: 768px");
   const [openModal, setOpenModal] = useState(false);
+  const [cookie, setCookie] = useCookies(["authToken"]);
 
   useEffect(() => {
     if (window.innerWidth < 768) {
@@ -42,7 +44,8 @@ export default function Landing() {
               position: "absolute",
               letterSpacing: "0.1em",
               mt: 2,
-              mr: 2.5,
+              mr: 1,
+              ml: 1,
               fontSize: "0.8rem",
             }
           }}
@@ -58,7 +61,7 @@ export default function Landing() {
           <img src={logo} alt="logo" className={contentStyles.logo} />
           {/* Register now button (more can be added) */}
         </div>
-        {isMobileView && (
+        {(isMobileView && !cookie?.authToken) && (
           <div className={contentStyles.buttonTray}>
             <button
               className={navStyles.loginButton}
