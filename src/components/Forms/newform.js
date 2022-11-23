@@ -746,8 +746,7 @@ const NewForm = (props) => {
           </Snackbar>
           <Snackbar open={showSuccess}>
             <Alert severity="success">
-              You are registered!! Click the link received in the mail to
-              verify.
+              Registration sucessfull!
             </Alert>
           </Snackbar>
           <Container>
