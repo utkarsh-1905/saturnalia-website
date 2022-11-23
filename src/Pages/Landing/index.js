@@ -5,6 +5,8 @@ import navStyles from "../../components/Navbar/navstyles.module.css";
 import Stars from "../../components/Stars/Stars";
 import NewForm from "../../components/Forms/newform";
 import { useMediaQuery } from "@mui/material";
+import {Fab} from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export default function Landing() {
   const [isMobileView, setIsMobileView] = useState(false);
@@ -24,6 +26,33 @@ export default function Landing() {
         {/* <div className={contentStyles.backdrop}>
           <Stars />
         </div> */}
+        <Fab
+          variant="extended"
+          color= "primary"
+          size= "medium"
+          sx={{ 
+            position: "absolute",
+            letterSpacing: "0.1em",
+            right: "0",
+            mt: 2,
+            mr: 1,
+            "@media (max-width: 768px)": {
+              bottom: "40%",
+              right: "0",
+              position: "absolute",
+              letterSpacing: "0.1em",
+              mt: 2,
+              mr: 2.5,
+              fontSize: "0.8rem",
+            }
+          }}
+          onClick={() => {
+            document.location.href = "https://forms.gle/4QaGsmcLUThzgwrw5";
+          }}
+        >
+          <InfoOutlinedIcon  sx={{color: "#00FFFb", mr:1}}/>
+          Registration for Derabassi Students
+        </Fab>
         <div className={contentStyles.content}>
           {/* Hero Logo */}
           <img src={logo} alt="logo" className={contentStyles.logo} />
