@@ -39,7 +39,7 @@ export default function Landing() {
             mt: 2,
             mr: 1,
             "@media (max-width: 768px)": {
-              bottom: "40%",
+              bottom: "30%",
               right: "0",
               position: "absolute",
               letterSpacing: "0.1em",
