@@ -18,11 +18,18 @@ const EventCard = ({ event }) => {
   // }
 
   const registerTeam = () => {
+    if(event.redirect_link != null){
+      window.open(event.redirect_link);
+      return;
+    }
     showTeamModal(true);
   }
   const register = () => {
     console.log(cookie.authToken);
-
+    if(event.redirect_link != null){
+      window.open(event.redirect_link);
+      return;
+    }
     if (cookie.authToken) {
       console.log(event.id);
       var data = new FormData();
@@ -90,25 +97,16 @@ const EventCard = ({ event }) => {
           <div className="event-card-button-div">
             {event.registration_allowed && (
               !event.is_team_event?
-                ( event.name === 'Smart Punjab Hackathon' || 'Place-O-Pedia' ?
-                (<button className="card-event-register" onClick={()=>{window.open(`${event.redirect_link}`,'_blank')}}>
-                  Register Now
-                </button>) 
-                :
-                (<button className="card-event-register" onClick={register}>
-                Register Now
-              </button>)
-
+                (
+                  <button className="card-event-register" onClick={register}>
+                    Register Now
+                  </button>
                 )
                 :
-                ( event.name === 'Smart Punjab Hackathon' || 'Place-O-Pedia' ? 
-                (<button className="card-event-register" onClick={()=>{window.open(`${event.redirect_link}`,'_blank')}}>
-                Register/Join Team
-              </button>):(
+                (
                   <button className="card-event-register" onClick={registerTeam}>
                     Register/Join Team
                   </button>
-                )
                 )
             )}
           </div>
