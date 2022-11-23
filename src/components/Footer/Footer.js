@@ -15,9 +15,9 @@ const Footer = () => {
   const [iconsWidth,setIconsWidth]=useState();
 
   useEffect(()=>{
-    if(window.innerWidth<500){
-      setIconsHeight('30px');
-      setIconsWidth('30px');
+    if(window.innerWidth<800){
+      setIconsHeight('40px');
+      setIconsWidth('40px');
     }
   },[])
   

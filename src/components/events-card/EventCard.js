@@ -13,9 +13,9 @@ const EventCard = ({ event }) => {
   const [teamModal, showTeamModal] = React.useState(false);
   console.log(event);
 
-  const gotoDevFolio=()=>{
-    window.location.href="https://smart-punjab-hackathon-tiet.devfolio.co/";
-  }
+  // const gotoDevFolio=()=>{
+  //   window.location.href="https://smart-punjab-hackathon-tiet.devfolio.co/";
+  // }
 
   const registerTeam = () => {
     showTeamModal(true);
@@ -90,8 +90,8 @@ const EventCard = ({ event }) => {
           <div className="event-card-button-div">
             {event.registration_allowed && (
               !event.is_team_event?
-                ( event.name === 'Smart Punjab Hackathon' ?
-                (<button className="card-event-register" onClick={()=>{gotoDevFolio()}}>
+                ( event.name === 'Smart Punjab Hackathon' || 'Place-O-Pedia' ?
+                (<button className="card-event-register" onClick={()=>{window.open(`${event.redirect_link}`,'_blank')}}>
                   Register Now
                 </button>) 
                 :
@@ -101,8 +101,8 @@ const EventCard = ({ event }) => {
 
                 )
                 :
-                ( event.name === 'Smart Punjab Hackathon' ? 
-                (<button className="card-event-register" onClick={()=>{gotoDevFolio()}}>
+                ( event.name === 'Smart Punjab Hackathon' || 'Place-O-Pedia' ? 
+                (<button className="card-event-register" onClick={()=>{window.open(`${event.redirect_link}`,'_blank')}}>
                 Register/Join Team
               </button>):(
                   <button className="card-event-register" onClick={registerTeam}>
