@@ -19,6 +19,7 @@
 .contact-us-form{
     display: flex;
     flex-direction: column;
+    /* border-style: solid; */
 }
 
 .register-form{
@@ -221,6 +222,10 @@ textarea {
         font-size: 10px;
         margin-left: 10px;
         margin-top: 11px;
+    }
+
+    .contact-us-form{
+        margin-left: 10px;
     }
  }
  
