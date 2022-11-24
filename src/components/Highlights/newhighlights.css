@@ -1,14 +1,20 @@
 .container{
     width: 100vw;
     height: 100vh;
-    display: flex;
+    /* display: flex; */
+    flex-direction: column;
     /* margin-left: 15px;
     margin-right: 15px; */
     font-family: 'BatmanForeverOutline', sans-serif;
     font-family: 'BatmanForeverAlternate', sans-serif;
     margin-top: 20px;
+    padding: 2% 0;
 }
-
+.highlights-container{
+    padding: 5%;
+    display: flex;
+    flex-direction: row;
+}
 .left-highlight{
     /* margin-top: 10%; */
     display: flex;
@@ -46,6 +52,18 @@
 
 .highlight-content{
     font-size:1.8rem;
+    color:rgb(224, 224, 224);
+    text-shadow: 2px 2px 3px black;
+}
+.artists{
+    display: flex;
+    justify-content: space-evenly;
+}
+.artist-content{
+    width: 50%;
+}
+.highlight-content-artists{
+    font-size:1.5rem;
     color:rgb(224, 224, 224);
     text-shadow: 2px 2px 3px black;
 }
@@ -96,8 +114,19 @@
         margin-left: 120px;
         margin-right: 120px;
     }
+    .highlight-content-artists{
+        font-size:1.2rem;
+        color:rgb(224, 224, 224);
+        text-shadow: 2px 2px 3px black;
+    }
 }
 
+/* .artists{
+    width: 100vw;
+}
+.zaeden{
+    width: 500px;
+} */
 
 @media screen and (max-width:800px) {
     .container{
@@ -106,7 +135,13 @@
         justify-content: center;
         text-align: center;
     }
-
+    .highlights-container{
+        height: 100%;
+        /* padding: 1%; */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
     .left-highlight{
         display: flex;
         justify-content: center;
