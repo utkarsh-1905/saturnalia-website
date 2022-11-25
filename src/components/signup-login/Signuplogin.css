@@ -1,0 +1,85 @@
+.signup-login-container{
+    width: 100vw;
+    height:100vh;
+    margin-bottom: 50px;
+    overflow-x: hidden;
+}
+
+.login-signup-main{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.left-div-sign{
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    /* border-style: solid; */
+    justify-content: center;
+    text-align: center;
+    background-color: black;
+    /* height: 78.2vh; */
+}
+
+.right-div-sign{
+    /* border-style: solid; */
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    height: 100vh;
+}
+
+.image-signup{
+    /* width: 60.15vw; */
+    width: 45vw;
+    margin: 10vh;
+}
+
+.signHeading{
+    font-size: 3.5rem;
+      /* border-style: solid; */
+      font-family: 'BatmanForeverOutline', sans-serif;
+      font-family: 'BatmanForeverAlternate', sans-serif;
+      margin-left: 4.5rem;
+      margin-right: 4.5rem;
+}
+
+
+@media screen and (max-width:1600px) {
+    .signHeading{
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .signHeading{
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width:800px){
+    .signHeading{
+        /* margin: 50px; */
+        font-size: 2rem;
+        margin: 1rem;
+    }
+
+    .login-signup-main{
+        height: 100vh;
+        width: 100vw;
+    }
+
+
+    .image-signup{
+        width: 80vw;
+        /* border-style: solid; */
+        margin-top: -150px;
+    }
+
+    .login-signup-main{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import EmailVerified from "./components/email-verified/index";
 import Loader from "./components/Loader/loader";
 import Dashboard from "./components/Dashboard";
+import SIGNUPLOGIN from './components/signup-login/index'
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
               <Backdrop>
                 <section id="landing">
                   <Landing />
+                </section>
+                <section>
+                  <SIGNUPLOGIN/>
                 </section>
                 <section id="highlights">
                   <Highlights />
