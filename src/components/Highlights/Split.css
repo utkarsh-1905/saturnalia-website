@@ -168,7 +168,7 @@
 
     .split-image-container:hover > .split-image{
         /* margin:-17px; */
-        margin:-5px;
+        margin:3px;
         box-shadow: 0px 0px 5px grey;
     }
     
