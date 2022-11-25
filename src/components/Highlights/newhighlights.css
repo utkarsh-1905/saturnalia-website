@@ -181,5 +181,10 @@
     .eventHead{
         font-size: 2.5rem;
     }
+
+    .highlight-content-artists{
+        font-size: 0.5rem;
+        margin: 20px;
+    }
     
 }
